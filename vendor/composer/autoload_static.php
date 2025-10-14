@@ -11,33 +11,33 @@ class ComposerStaticInit261687c3e3cd870899aff0ad8589f210
     );
 
     public static $prefixLengthsPsr4 = array (
-        'T' => 
+        'T' =>
         array (
             'TrueBV\\' => 7,
         ),
-        'S' => 
+        'S' =>
         array (
             'Symfony\\Polyfill\\Mbstring\\' => 26,
         ),
-        'P' => 
+        'P' =>
         array (
             'PHPMailer\\PHPMailer\\' => 20,
         ),
-        'O' => 
+        'O' =>
         array (
             'OAuth\\' => 6,
         ),
-        'N' => 
+        'N' =>
         array (
             'NukeViet\\Module\\' => 16,
             'NukeViet\\Api\\' => 13,
             'NukeViet\\' => 9,
         ),
-        'L' => 
+        'L' =>
         array (
             'League\\Url\\' => 11,
         ),
-        'C' => 
+        'C' =>
         array (
             'Com\\Tecnick\\Color\\' => 18,
             'Com\\Tecnick\\Barcode\\' => 20,
@@ -45,63 +45,63 @@ class ComposerStaticInit261687c3e3cd870899aff0ad8589f210
     );
 
     public static $prefixDirsPsr4 = array (
-        'TrueBV\\' => 
+        'TrueBV\\' =>
         array (
             0 => __DIR__ . '/..' . '/true/punycode/src',
         ),
-        'Symfony\\Polyfill\\Mbstring\\' => 
+        'Symfony\\Polyfill\\Mbstring\\' =>
         array (
             0 => __DIR__ . '/..' . '/symfony/polyfill-mbstring',
         ),
-        'PHPMailer\\PHPMailer\\' => 
+        'PHPMailer\\PHPMailer\\' =>
         array (
             0 => __DIR__ . '/..' . '/phpmailer/phpmailer/src',
         ),
-        'OAuth\\' => 
+        'OAuth\\' =>
         array (
             0 => __DIR__ . '/..' . '/and/oauth/src',
         ),
-        'NukeViet\\Module\\' => 
+        'NukeViet\\Module\\' =>
         array (
             0 => __DIR__ . '/../..' . '/modules',
         ),
-        'NukeViet\\Api\\' => 
+        'NukeViet\\Api\\' =>
         array (
             0 => __DIR__ . '/../..' . '/includes/api',
         ),
-        'NukeViet\\' => 
+        'NukeViet\\' =>
         array (
             0 => __DIR__ . '/..' . '/vinades/nukeviet',
         ),
-        'League\\Url\\' => 
+        'League\\Url\\' =>
         array (
             0 => __DIR__ . '/..' . '/league/url/src',
         ),
-        'Com\\Tecnick\\Color\\' => 
+        'Com\\Tecnick\\Color\\' =>
         array (
             0 => __DIR__ . '/..' . '/tecnickcom/tc-lib-color/src',
         ),
-        'Com\\Tecnick\\Barcode\\' => 
+        'Com\\Tecnick\\Barcode\\' =>
         array (
             0 => __DIR__ . '/..' . '/tecnickcom/tc-lib-barcode/src',
         ),
     );
 
     public static $prefixesPsr0 = array (
-        'G' => 
+        'G' =>
         array (
-            'Gregwar\\Image' => 
+            'Gregwar\\Image' =>
             array (
                 0 => __DIR__ . '/..' . '/gregwar/image',
             ),
-            'Gregwar\\Cache' => 
+            'Gregwar\\Cache' =>
             array (
                 0 => __DIR__ . '/..' . '/gregwar/cache',
             ),
         ),
-        'B' => 
+        'B' =>
         array (
-            'Buzz' => 
+            'Buzz' =>
             array (
                 0 => __DIR__ . '/..' . '/kriswallsmith/buzz/lib',
             ),
