@@ -1,4 +1,0 @@
-[Thu, 02 Oct 2025 21:17:34 +0700] [localhost] [::1] [User Notice(1024): SQLSTATE[HY000] [1045] Access denied for user 'admin'@'localhost' (using password: YES)] [FILE: /vendor/vinades/nukeviet/Core/Database.php] [LINE: 94]
-[Thu, 02 Oct 2025 21:18:33 +0700] [localhost] [::1] [Error(1): Maximum execution time of 120 seconds exceeded] [FILE: /vendor/vinades/nukeviet/Core/Database.php] [LINE: 93]
-[Thu, 02 Oct 2025 21:23:37 +0700] [localhost] [::1] [Error(1): Maximum execution time of 120 seconds exceeded] [FILE: /vendor/vinades/nukeviet/Core/Request.php] [LINE: 659]
-[Fri, 03 Oct 2025 01:06:09 +0700] [localhost] [::1] [Warning(2): imagecreatefrompng(): gd-png: libpng warning: iCCP: known incorrect sRGB profile] [FILE: /vendor/vinades/nukeviet/Files/Image.php] [LINE: 205]
