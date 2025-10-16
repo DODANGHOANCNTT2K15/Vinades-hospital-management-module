@@ -49,9 +49,11 @@ modules/
 └── qlbenhvien/
     ├── admin/
     │ ├── main.php 
+    │ ├── schedule.php 
     │ └── ...
     ├── funcs/
     │ ├── main.php 
+    │ ├── booking.php 
     │ └── ...
     ├── language/
     │ └── vi.php
