@@ -1,4 +1,4 @@
-# 🏥 Module Quản Lý Bệnh Viện - NukeViet 4.x
+# 🏥 Module Quản Lý Bệnh Viện - NukeViet 4.5
 
 ## 📖 Giới thiệu
 **Module Quản Lý Bệnh Viện** là một module được phát triển trên nền tảng **NukeViet 4.5**, giúp quản lý các hoạt động cơ bản của một bệnh viện như:
