@@ -3,24 +3,19 @@ if (!defined('NV_IS_MOD_QLBENHVIEN')) die('Stop!!!');
 
 global $db, $db_config, $nv_Request, $user_info;
 
-// Nếu chưa đăng nhập thì chuyển hướng về trang đăng nhập
 if (empty($user_info['userid'])) {
     nv_redirect_location(NV_BASE_SITEURL . 'index.php?language=vi&nv=users&op=login');
 }
 
-// Bảng bệnh nhân
 $table_benhnhan = $db_config['prefix'] . "_ql_benhvien_benhnhan";
 
-// Tìm bệnh nhân theo userid
 $sql = "SELECT * FROM " . $table_benhnhan . " WHERE userid = :userid";
 $stmt = $db->prepare($sql);
 $stmt->bindValue(':userid', $user_info['userid'], PDO::PARAM_INT);
 $stmt->execute();
 $benhnhan = $stmt->fetch();
 
-// Nếu chưa có thì thêm mới vào bảng bệnh nhân
 if (empty($benhnhan)) {
-    // Nếu người dùng gửi form chọn giới tính lần đầu
     if ($nv_Request->isset_request('submit_info', 'post')) {
         $gioitinh = $nv_Request->get_int('gioitinh', 'post', 0);
 
@@ -44,7 +39,7 @@ if (empty($benhnhan)) {
             'sdt' => ''
         ];
     } else {
-        // Nếu chưa có bệnh nhân, hiển thị form nhập giới tính lần đầu
+        // form giới tính lần đầu — vẫn giữ inline hoặc tách riêng form_gioitinh.tpl
         $contents  = '<h2>Thông tin cá nhân</h2>';
         $contents .= '<p>Xin chào <strong>' . htmlspecialchars($user_info['full_name']) . '</strong>, bạn cần cung cấp giới tính để hoàn tất hồ sơ bệnh nhân.</p>';
         $contents .= '<form method="post">';
@@ -62,11 +57,9 @@ if (empty($benhnhan)) {
     $benhnhan_id = $benhnhan['id'];
 }
 
-// Bảng lịch khám
 $table_lichkham = $db_config['prefix'] . "_ql_benhvien_lichkham";
 $notice = '';
 
-// Khi người dùng gửi form đặt lịch
 if ($nv_Request->isset_request('submit', 'post')) {
     $ngaykham = $nv_Request->get_string('ngaykham', 'post', '');
     $giokham = $nv_Request->get_string('giokham', 'post', '');
@@ -91,32 +84,30 @@ if ($nv_Request->isset_request('submit', 'post')) {
     }
 }
 
-// --- Giao diện hiển thị ---
-$contents  = '<h2>Đặt lịch khám bệnh viện</h2>' . $notice;
+// --- Render giao diện bằng XTemplate ---
+$xtpl = new XTemplate('booking.tpl', NV_ROOTDIR . '/themes/' . $module_info['template'] . '/modules/' . $module_file);
 
-// Thông tin bệnh nhân
-$contents .= '<div style="border:1px solid #ccc;padding:10px;margin-bottom:10px;">';
-$contents .= '<h3>Thông tin bệnh nhân</h3>';
-$contents .= '<p><strong>Họ tên:</strong> ' . htmlspecialchars($benhnhan['hoten']) . '</p>';
-$contents .= '<p><strong>Email:</strong> ' . htmlspecialchars($benhnhan['email']) . '</p>';
+$xtpl->assign('NOTICE', $notice);
+$xtpl->assign('HOTEN', htmlspecialchars($benhnhan['hoten']));
+$xtpl->assign('EMAIL', htmlspecialchars($benhnhan['email']));
+
 if (isset($benhnhan['gioitinh'])) {
-    $contents .= '<p><strong>Giới tính:</strong> ' . ($benhnhan['gioitinh'] == 1 ? 'Nam' : 'Nữ') . '</p>';
+    $xtpl->assign('GIOITINH', $benhnhan['gioitinh'] == 1 ? 'Nam' : 'Nữ');
+    $xtpl->parse('main.gioitinh');
 }
-if (!empty($benhnhan['sdt'])) {
-    $contents .= '<p><strong>SĐT:</strong> ' . htmlspecialchars($benhnhan['sdt']) . '</p>';
-}
-if (!empty($benhnhan['diachi'])) {
-    $contents .= '<p><strong>Địa chỉ:</strong> ' . htmlspecialchars($benhnhan['diachi']) . '</p>';
-}
-$contents .= '</div>';
 
-// Form đặt lịch
-$contents .= '<form method="post">';
-$contents .= '<p><label>Ngày khám: <input type="date" name="ngaykham" required></label></p>';
-$contents .= '<p><label>Giờ khám: <input type="time" name="giokham" required></label></p>';
-$contents .= '<p><label>Ghi chú: <textarea name="ghichu" rows="3" cols="40" placeholder="Nhập nội dung ghi chú..."></textarea></label></p>';
-$contents .= '<p><button type="submit" name="submit">Đặt lịch</button></p>';
-$contents .= '</form>';
+if (!empty($benhnhan['sdt'])) {
+    $xtpl->assign('SDT', htmlspecialchars($benhnhan['sdt']));
+    $xtpl->parse('main.sdt');
+}
+
+if (!empty($benhnhan['diachi'])) {
+    $xtpl->assign('DIACHI', htmlspecialchars($benhnhan['diachi']));
+    $xtpl->parse('main.diachi');
+}
+
+$xtpl->parse('main');
+$contents = $xtpl->text('main');
 
 include NV_ROOTDIR . '/includes/header.php';
 echo nv_site_theme($contents);

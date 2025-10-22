@@ -1,11 +1,20 @@
 <?php
 if (!defined('NV_IS_MOD_QLBENHVIEN')) die('Stop!!!');
 
-// Trang chính của module ngoài site
-$contents  = '<h2>Hệ thống quản lý bệnh viện</h2>';
-$contents .= '<p>Chào mừng bạn đến với hệ thống đặt lịch khám trực tuyến.</p>';
-$contents .= '<p><a href="' . NV_BASE_SITEURL . 'index.php?nv=' . $module_name . '&op=booking">→ Đặt lịch khám ngay</a></p>';
+global $module_name, $module_file, $module_info;
 
+// --- Chuẩn bị dữ liệu truyền ra template ---
+$link_booking = NV_BASE_SITEURL . 'index.php?nv=' . $module_name . '&op=booking';
+
+// --- Gọi giao diện bằng XTemplate ---
+$xtpl = new XTemplate('main.tpl', NV_ROOTDIR . '/themes/' . $module_info['template'] . '/modules/' . $module_file);
+
+$xtpl->assign('LINK_BOOKING', $link_booking);
+
+$xtpl->parse('main');
+$contents = $xtpl->text('main');
+
+// --- Hiển thị ra ngoài site ---
 include NV_ROOTDIR . '/includes/header.php';
 echo nv_site_theme($contents);
 include NV_ROOTDIR . '/includes/footer.php';
