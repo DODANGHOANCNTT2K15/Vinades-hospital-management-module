@@ -1,14 +1,17 @@
 <?php
 if (!defined('NV_IS_QLBENHVIEN_ADMIN')) die('Stop!!!');
 
-global $db, $db_config;
+global $db, $db_config, $module_name;
 
-// Tên bảng trong CSDL
+// Khai báo đường dẫn đến file template
+$xtpl = new XTemplate('main.tpl', NV_ROOTDIR . '/themes/admin_default/modules/' . $module_name);
+
+// Tên các bảng
 $table_lichkham = $db_config['prefix'] . "_ql_benhvien_lichkham";
 $table_benhnhan = $db_config['prefix'] . "_ql_benhvien_benhnhan";
 $table_bacsi    = $db_config['prefix'] . "_ql_benhvien_bacsi";
 
-// Lấy 20 lịch khám mới nhất, JOIN để lấy tên bệnh nhân và bác sĩ
+// Lấy dữ liệu
 $sql = "
     SELECT 
         lk.id,
@@ -25,53 +28,41 @@ $sql = "
     ORDER BY lk.id DESC
     LIMIT 0, 20
 ";
-
 $result = $db->query($sql)->fetchAll();
 
-$contents = '<h2>Danh sách lịch khám</h2>';
-$contents .= '<table class="table table-striped table-bordered">';
-$contents .= '<thead>
-<tr>
-    <th>ID</th>
-    <th>ID Bệnh nhân</th>
-    <th>Tên bệnh nhân</th>
-    <th>Tên bác sĩ</th>
-    <th>Ngày khám</th>
-    <th>Giờ khám</th>
-    <th>Trạng thái</th>
-    <th>Ghi chú</th>
-</tr>
-</thead><tbody>';
-
+// Gán dữ liệu cho từng dòng
 foreach ($result as $row) {
-    // Xác định trạng thái
     switch ($row['trangthai']) {
         case 'pending':
-            $status_label = 'Chờ xác nhận';
+            $row['trangthai_label'] = 'Chờ xác nhận';
             break;
         case 'confirmed':
-            $status_label = 'Đã xác nhận';
+            $row['trangthai_label'] = 'Đã xác nhận';
             break;
         case 'cancelled':
-            $status_label = 'Đã hủy';
+            $row['trangthai_label'] = 'Đã hủy';
             break;
         default:
-            $status_label = 'Không rõ';
+            $row['trangthai_label'] = 'Không rõ';
     }
 
-    $contents .= '<tr>';
-    $contents .= '<td>' . $row['id'] . '</td>';
-    $contents .= '<td>' . htmlspecialchars($row['benhnhan_id']) . '</td>';
-    $contents .= '<td>' . htmlspecialchars(isset($row['ten_benhnhan']) ? $row['ten_benhnhan'] : '-') . '</td>';
-    $contents .= '<td>' . htmlspecialchars(isset($row['ten_bacsi']) ? $row['ten_bacsi'] : '-') . '</td>';
-    $contents .= '<td>' . htmlspecialchars($row['ngaykham']) . '</td>';
-    $contents .= '<td>' . htmlspecialchars($row['giokham']) . '</td>';
-    $contents .= '<td>' . htmlspecialchars($status_label) . '</td>';
-    $contents .= '<td>' . htmlspecialchars($row['ghichu']) . '</td>';
-    $contents .= '</tr>';
+    // Nếu tên bệnh nhân hoặc bác sĩ null thì hiển thị "-"
+    $row['ten_benhnhan'] = !empty($row['ten_benhnhan']) ? $row['ten_benhnhan'] : '-';
+    $row['ten_bacsi']    = !empty($row['ten_bacsi']) ? $row['ten_bacsi'] : '-';
+
+    // Gán biến cho template
+    $xtpl->assign('ROW', $row);
+    $xtpl->parse('main.loop');
 }
 
-$contents .= '</tbody></table>';
+// Gán tiêu đề bảng
+$xtpl->assign('TITLE', 'Danh sách lịch khám');
+
+// Parse khối chính
+$xtpl->parse('main');
+
+// Xuất nội dung
+$contents = $xtpl->text('main');
 
 include NV_ROOTDIR . '/includes/header.php';
 echo nv_admin_theme($contents);
