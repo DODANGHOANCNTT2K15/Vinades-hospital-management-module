@@ -1,0 +1,683 @@
+:root {
+    --mw-primary-color: #2980b9;
+    --mw-primary-hover-color: #3498db;
+    --mw-secondary-color: #e91e63;
+    --mw-secondary-hover-color: #c2185b;
+    --mw-background-color: #f5f5f5;
+    --mw-text-color: #333;
+    --mw-text-light-color: #666;
+    --mw-border-color: #ddd;
+    --mw-box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    --mw-border-radius: 10px;
+    --mw-transition: 0.3s ease;
+}
+
+.missworld-contestants {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.text-center {
+    text-align: center;
+}
+
+h2 {
+    text-align: center;
+    color: var(--mw-text-color);
+    margin-bottom: 20px;
+}
+
+.contestant-grid {
+    display: grid;
+    gap: 20px;
+    padding: 20px;
+    grid-template-columns: 1fr;
+}
+
+@media (min-width: 576px) {
+    .contestant-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (min-width: 768px) {
+    .contestant-grid {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+@media (min-width: 992px) {
+    .contestant-grid {
+        grid-template-columns: repeat(4, 1fr);
+    }
+}
+
+/* Contestant Card */
+.contestant-card {
+    background-color: var(--mw-background-color);
+    border-radius: var(--mw-border-radius);
+    overflow: hidden;
+    box-shadow: var(--mw-box-shadow);
+    transition: transform var(--mw-transition);
+}
+
+.contestant-card:hover {
+    transform: translateY(-5px);
+}
+
+.contestant-card img {
+    width: 100%;
+    height: auto;
+    aspect-ratio: 3 / 4;
+    object-fit: cover;
+}
+
+.contestant-card h3 {
+    padding: 10px;
+    margin: 0;
+    font-size: 14px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.contestant-card p {
+    padding: 0 10px 10px;
+    margin: 0;
+    font-size: 11px;
+    color: var(--mw-text-light-color);
+}
+
+/* Buttons */
+.vote-button, .contestant-detail-vote-button {
+    display: block;
+    width: 100%;
+    padding: 10px;
+    background-color: var(--mw-primary-color);
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color var(--mw-transition);
+    font-size: 14px;
+    text-transform: uppercase;
+    font-weight: bold;
+}
+
+.vote-button:hover, .contestant-detail-vote-button:hover {
+    background-color: var(--mw-primary-hover-color);
+}
+
+.contestant-detail-vote-button {
+    display: inline-block;
+    padding: 10px 20px;
+    font-size: 16px;
+    background-color: var(--mw-secondary-color);
+}
+
+.contestant-detail-vote-button:hover {
+    background-color: var(--mw-secondary-hover-color);
+}
+
+/* Modal chung */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0,0,0,0.4);
+}
+
+.modal-content {
+    background-color: #fff;
+    margin: 5% auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 90%;
+    max-width: 400px;
+    position: relative;
+    border-radius: 5px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+.close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+    cursor: pointer;
+    position: absolute;
+    right: 10px;
+    top: 5px;
+}
+
+.close:hover,
+.close:focus {
+    color: #000;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+/* Form bình chọn */
+#voting-modal .modal-content {
+    max-width: 400px;
+    display: flex;
+    flex-direction: column;
+}
+
+#voting-modal .modal-header {
+    text-align: center;
+    padding-bottom: 10px;
+}
+
+#voting-modal .modal-body {
+    display: flex;
+    flex-direction: column;
+}
+
+#voting-modal .modal-image {
+    text-align: center;
+    margin-bottom: 15px;
+}
+
+#voting-modal .modal-image img {
+    max-width: 100%;
+    height: auto;
+    max-height: 300px;
+    object-fit: cover;
+    border-radius: 5px;
+}
+
+#voting-modal .contestant-name {
+    font-size: 18px;
+    font-weight: bold;
+    margin-bottom: 15px;
+    text-align: center;
+}
+
+#voting-modal .form-group {
+    margin-bottom: 15px;
+}
+
+#voting-modal .form-control {
+    width: 100%;
+    padding: 8px 12px;
+    font-size: 14px;
+    border: 1px solid var(--mw-border-color);
+    border-radius: 4px;
+}
+
+#voting-modal .btn-primary {
+    width: 100%;
+    padding: 10px;
+    font-size: 16px;
+    background-color: var(--mw-primary-color);
+    border: none;
+    color: #fff;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color var(--mw-transition);
+}
+
+#voting-modal .btn-primary:hover {
+    background-color: var(--mw-primary-hover-color);
+}
+
+/* Form xác minh */
+#verification-modal .modal-title {
+    font-size: 18px;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+#verification-modal .progress-dots {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px;
+}
+
+#verification-modal .progress-step {
+    display: flex;
+    align-items: center;
+    margin: 0 10px;
+}
+
+#verification-modal .progress-dot {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    background-color: #ccc;
+    color: #fff;
+    margin-right: 10px;
+}
+
+#verification-modal .progress-dot.active {
+    background-color: #5cb85c;
+}
+
+#verification-modal .progress-step span {
+    font-size: 14px;
+}
+
+#verification-modal .verification-email-alert {
+    background-color: #e8f4ff;
+    border: 1px solid #b8e2ff;
+    color: #31708f;
+    padding: 10px;
+    margin-bottom: 15px;
+    border-radius: 4px;
+    text-align: center;
+}
+
+#verification-modal .form-group {
+    margin-bottom: 15px;
+}
+
+#verification-modal .input-group {
+    display: flex;
+    width: 100%;
+}
+
+#verification-modal .form-control {
+    flex: 1;
+    height: 34px;
+    padding: 6px 12px;
+    font-size: 14px;
+    border: 1px solid #ccc;
+    border-radius: 4px 0 0 4px;
+}
+
+#verification-modal .input-group-btn {
+    width: auto;
+}
+
+#verification-modal .btn-default {
+    height: 34px;
+    padding: 6px 12px;
+    font-size: 14px;
+    border: 1px solid #ccc;
+    border-left: none;
+    border-radius: 0 4px 4px 0;
+    background-color: #f0f0f0;
+    cursor: pointer;
+}
+
+#verification-modal .btn-primary {
+    width: 100%;
+    padding: 10px;
+    font-size: 16px;
+    border-radius: 4px;
+    background-color: var(--mw-primary-color);
+    border: none;
+    color: #fff;
+    cursor: pointer;
+    transition: background-color var(--mw-transition);
+}
+
+#verification-modal .btn-primary:hover {
+    background-color: var(--mw-primary-hover-color);
+}
+
+/* Progress Dots */
+.progress-dots {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px;
+    width: 100%;
+    max-width: 400px;
+    margin: 0 auto;
+}
+
+.progress-step {
+    display: flex;
+    align-items: center;
+}
+
+.progress-dot {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    background-color: #bdc3c7;
+    color: #fff;
+    margin-right: 10px;
+}
+
+.progress-dot.active {
+    background-color: #2ecc71;
+}
+
+.progress-step span {
+    font-size: 14px;
+    line-height: 30px;
+}
+
+.progress-step:first-child {
+    margin-right: 40px;
+}
+
+/* Toast Notification */
+.toast {
+    visibility: hidden;
+    min-width: 250px;
+    margin-left: -125px;
+    background-color: #333;
+    color: #fff;
+    text-align: center;
+    border-radius: 4px;
+    padding: 16px;
+    position: fixed;
+    z-index: 1001;
+    left: 50%;
+    bottom: 30px;
+    box-shadow: var(--mw-box-shadow);
+}
+
+.toast.show {
+    visibility: visible;
+    animation: fadein 0.5s, fadeout 0.5s 2.5s;
+}
+
+@keyframes fadein {
+    from {bottom: 0; opacity: 0;}
+    to {bottom: 30px; opacity: 1;}
+}
+
+@keyframes fadeout {
+    from {bottom: 30px; opacity: 1;}
+    to {bottom: 0; opacity: 0;}
+}
+
+/* Loading Overlay */
+.loading-overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 9999;
+}
+
+.loader {
+    border: 5px solid #f3f3f3;
+    border-top: 5px solid #3498db;
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    animation: spin 1s linear infinite;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin-top: -25px;
+    margin-left: -25px;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+/* Contestant Detail Page */
+.contestant-detail-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.contestant-detail-card {
+    display: flex;
+    background-color: #fff;
+    border-radius: var(--mw-border-radius);
+    overflow: hidden;
+    box-shadow: var(--mw-box-shadow);
+}
+
+.contestant-detail-image-container {
+    flex: 1;
+    position: relative;
+}
+
+.contestant-detail-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.contestant-detail-rank {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    background-color: white;
+    border-radius: 50%;
+    width: 80px;
+    height: 80px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    font-weight: bold;
+    box-shadow: var(--mw-box-shadow);
+    text-align: center;
+    padding: 5px;
+}
+
+.contestant-detail-rank span {
+    font-size: 15px;
+    line-height: 1.2;
+}
+
+.contestant-detail-rank .rank-number {
+    font-size: 32px;
+}
+
+.contestant-detail-info {
+    flex: 1;
+    padding: 20px;
+}
+
+.contestant-detail-name {
+    font-size: 32px;
+    color: var(--mw-text-color);
+    margin-bottom: 15px;
+}
+
+.contestant-detail-table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0;
+    margin-bottom: 20px;
+}
+
+.contestant-detail-table td {
+    padding: 8px 0;
+    border-bottom: 1px solid var(--mw-border-color);
+}
+
+.contestant-detail-table .contestant-detail-in td {
+    font-weight: bold;
+    font-size: 18px;
+    padding-bottom: 10px;
+    border-bottom: none;
+}
+
+.contestant-detail-table .info-label {
+    white-space: nowrap;
+    position: relative;
+    padding-right: 20px;
+}
+
+.contestant-detail-table .label-text {
+    display: inline-block;
+}
+
+.contestant-detail-table .info-colon {
+    position: absolute;
+    right: 10px;
+}
+
+.contestant-detail-table .info-value {
+    padding-left: 10px;
+    font-weight: bold;
+}
+
+/* Voting History */
+.contestant-detail-voting-history {
+    margin-top: 30px;
+    padding: 20px;
+    background-color: #f9f9f9;
+    border-radius: var(--mw-border-radius);
+    box-shadow: var(--mw-box-shadow);
+}
+
+.contestant-detail-voting-history h2 {
+    font-size: 24px;
+    margin-bottom: 15px;
+}
+
+.voting-history-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.voting-history-table th,
+.voting-history-table td {
+    padding: 10px;
+    text-align: left;
+    border-bottom: 1px solid var(--mw-border-color);
+}
+
+.voting-history-table th {
+    background-color: #f2f2f2;
+    font-weight: bold;
+}
+
+.voting-history-table tr:last-child td {
+    border-bottom: none;
+}
+
+.no-votes-message {
+    font-style: italic;
+    color: var(--mw-text-light-color);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    #voting-modal .modal-content {
+        width: 95%;
+        margin: 10px auto;
+    }
+
+    #voting-modal .modal-image img {
+        max-height: 250px;
+    }
+    
+    #voting-modal .contestant-name {
+        font-size: 16px;
+    }
+
+    .modal-grid {
+        flex-direction: column;
+    }
+    
+    .modal-image, .modal-form {
+        max-width: 100%;
+    }
+    
+    .contestant-detail-card {
+        flex-direction: column;
+    }
+
+    .contestant-detail-image-container,
+    .contestant-detail-info {
+        width: 100%;
+    }
+
+    .contestant-detail-name {
+        font-size: 20px;
+    }
+
+    .contestant-detail-table td {
+        font-size: 14px;
+    }
+    
+    .contestant-card h3 {
+        font-size: 14px;
+    }
+    
+    .contestant-card p {
+        font-size: 12px;
+    }
+    
+    .vote-button {
+        font-size: 12px;
+        padding: 8px;
+    }
+    
+    .contestant-detail-voting-history {
+        padding: 15px;
+    }
+
+    .contestant-detail-voting-history h2 {
+        font-size: 20px;
+    }
+
+    .voting-history-table th,
+    .voting-history-table td {
+        padding: 8px;
+        font-size: 14px;
+    }
+}
+
+/* Focus styles for better accessibility */
+.btn:focus,
+.form-control:focus {
+    outline: 2px solid var(--mw-primary-color);
+    outline-offset: 2px;
+}
+.vote-button:focus,
+.modal-content input:focus {
+    outline: 2px solid var(--mw-primary-color);
+    outline-offset: 2px;
+}
+
+/* High contrast mode */
+@media (prefers-contrast: high) {
+    .modal-content {
+        border: 2px solid #000;
+    }
+    
+    .btn,
+    .form-control {
+        border: 2px solid #000;
+    }
+    :root {
+        --mw-primary-color: #0000FF;
+        --mw-primary-hover-color: #000080;
+        --mw-secondary-color: #FF0000;
+        --mw-secondary-hover-color: #800000;
+        --mw-text-color: #000000;
+        --mw-text-light-color: #202020;
+        --mw-background-color: #FFFFFF;
+    }
+    
+    .contestant-card,
+    .modal-content,
+    .contestant-detail-card {
+        border: 1px solid var(--mw-text-color);
+    }
+}

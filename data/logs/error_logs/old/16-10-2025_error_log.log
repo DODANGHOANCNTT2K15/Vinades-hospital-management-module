@@ -1,0 +1,124 @@
+[Thu, 16 Oct 2025 07:11:21 +0700] [localhost] [::1] [Warning(2): Undefined array key "main"] [FILE: /index.php] [LINE: 353]
+[Thu, 16 Oct 2025 07:11:21 +0700] [localhost] [::1] [Warning(2): require(C:/xampp/htdocs/nukeviet/modules/qlbenhvien/funcs/.php): Failed to open stream: No such file or directory] [FILE: /index.php] [LINE: 369] [TRACE:]
+#1  LINE: 369   FILE: /index.php
+
+[Thu, 16 Oct 2025 07:11:21 +0700] [localhost] [::1] [Error(1): Uncaught Error: Failed opening required 'C:/xampp/htdocs/nukeviet/modules/qlbenhvien/funcs/.php' (include_path='C:\xampp\php\PEAR') in C:\xampp\htdocs\nukeviet\index.php:369
+Stack trace:
+#0 {main}
+  thrown] [FILE: /index.php] [LINE: 369]
+[Thu, 16 Oct 2025 07:16:47 +0700] [localhost] [127.0.0.1] [Warning(2): Undefined array key "main"] [FILE: /index.php] [LINE: 353]
+[Thu, 16 Oct 2025 07:16:47 +0700] [localhost] [127.0.0.1] [Warning(2): require(C:/xampp/htdocs/nukeviet/modules/qlbenhvien/funcs/.php): Failed to open stream: No such file or directory] [FILE: /index.php] [LINE: 369] [TRACE:]
+#1  LINE: 369   FILE: /index.php
+
+[Thu, 16 Oct 2025 07:16:47 +0700] [localhost] [127.0.0.1] [Error(1): Uncaught Error: Failed opening required 'C:/xampp/htdocs/nukeviet/modules/qlbenhvien/funcs/.php' (include_path='C:\xampp\php\PEAR') in C:\xampp\htdocs\nukeviet\index.php:369
+Stack trace:
+#0 {main}
+  thrown] [FILE: /index.php] [LINE: 369]
+[Thu, 16 Oct 2025 07:21:02 +0700] [localhost] [::1] [User Notice(1024): PDOException Object
+(
+    [message:protected] => SQLSTATE[42S01]: Base table or view already exists: 1050 Table 'nv4_ql_benhvien_chuyenkhoa' already exists
+    [string:Exception:private] => 
+    [code:protected] => 42S01
+    [file:protected] => C:\xampp\htdocs\nukeviet\vendor\vinades\nukeviet\Core\Database.php
+    [line:protected] => 544
+    [trace:Exception:private] => Array
+        (
+            [0] => Array
+                (
+                    [file] => C:\xampp\htdocs\nukeviet\vendor\vinades\nukeviet\Core\Database.php
+                    [line] => 544
+                    [function] => query
+                    [class] => PDO
+                    [type] => ->
+                    [args] => Array
+                        (
+                            [0] => 
+CREATE TABLE `nv4_ql_benhvien_chuyenkhoa` (
+  `id` INT(11) NOT NULL AUTO_INCREMENT,
+  `tenchuyenkhoa` VARCHAR(100) NOT NULL,
+  `mota` MEDIUMTEXT DEFAULT NULL,
+  `trangthai` TINYINT(4) DEFAULT 1,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci
+                            [1] => 
+                        )
+
+                )
+
+            [1] => Array
+                (
+                    [file] => C:\xampp\htdocs\nukeviet\admin\modules\functions.php
+                    [line] => 192
+                    [function] => query
+                    [class] => NukeViet\Core\Database
+                    [type] => ->
+                    [args] => Array
+                        (
+                            [0] => 
+CREATE TABLE `nv4_ql_benhvien_chuyenkhoa` (
+  `id` INT(11) NOT NULL AUTO_INCREMENT,
+  `tenchuyenkhoa` VARCHAR(100) NOT NULL,
+  `mota` MEDIUMTEXT DEFAULT NULL,
+  `trangthai` TINYINT(4) DEFAULT 1,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci
+                        )
+
+                )
+
+            [2] => Array
+                (
+                    [file] => C:\xampp\htdocs\nukeviet\admin\modules\recreate_mod.php
+                    [line] => 22
+                    [function] => nv_setup_data_module
+                    [args] => Array
+                        (
+                            [0] => vi
+                            [1] => qlbenhvien
+                            [2] => 0
+                        )
+
+                )
+
+            [3] => Array
+                (
+                    [file] => C:\xampp\htdocs\nukeviet\admin\index.php
+                    [line] => 182
+                    [args] => Array
+                        (
+                            [0] => C:\xampp\htdocs\nukeviet\admin\modules\recreate_mod.php
+                        )
+
+                    [function] => require
+                )
+
+        )
+
+    [previous:Exception:private] => 
+    [errorInfo] => Array
+        (
+            [0] => 42S01
+            [1] => 1050
+            [2] => Table 'nv4_ql_benhvien_chuyenkhoa' already exists
+        )
+
+)
+] [FILE: /admin/modules/functions.php] [LINE: 194] [TRACE:]
+#1  LINE: 182   FILE: /admin/index.php
+#2  LINE: 22    FILE: /admin/modules/recreate_mod.php
+#3  LINE: 194   FILE: /admin/modules/functions.php
+
+[Thu, 16 Oct 2025 14:13:55 +0700] [localhost] [::1] [Error(1): Uncaught PDOException: SQLSTATE[23000]: Integrity constraint violation: 1452 Cannot add or update a child row: a foreign key constraint fails (`nukeviet`.`nv4_ql_benhvien_lichkham`, CONSTRAINT `fk_lichkham_bacsi` FOREIGN KEY (`bacsi_id`) REFERENCES `nv4_ql_benhvien_bacsi` (`id`) ON DELETE CASCADE ON UPDATE CASCADE) in C:\xampp\htdocs\nukeviet\vendor\vinades\nukeviet\Core\Database.php:694
+Stack trace:
+#0 C:\xampp\htdocs\nukeviet\vendor\vinades\nukeviet\Core\Database.php(694): PDOStatement->execute(NULL)
+#1 C:\xampp\htdocs\nukeviet\modules\qlbenhvien\admin\schedule.php(160): NukeViet\Core\NukeVietPDOStatement->execute()
+#2 C:\xampp\htdocs\nukeviet\admin\index.php(182): require('C:\\xampp\\htdocs...')
+#3 {main}
+  thrown] [FILE: /vendor/vinades/nukeviet/Core/Database.php] [LINE: 694]
+[Thu, 16 Oct 2025 14:16:14 +0700] [localhost] [::1] [Error(1): Uncaught PDOException: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'tenbacsi' in 'field list' in C:\xampp\htdocs\nukeviet\vendor\vinades\nukeviet\Core\Database.php:544
+Stack trace:
+#0 C:\xampp\htdocs\nukeviet\vendor\vinades\nukeviet\Core\Database.php(544): PDO->query('SELECT id, tenb...', NULL)
+#1 C:\xampp\htdocs\nukeviet\modules\qlbenhvien\admin\schedule.php(134): NukeViet\Core\Database->query('SELECT id, tenb...')
+#2 C:\xampp\htdocs\nukeviet\admin\index.php(182): require('C:\\xampp\\htdocs...')
+#3 {main}
+  thrown] [FILE: /vendor/vinades/nukeviet/Core/Database.php] [LINE: 544]
