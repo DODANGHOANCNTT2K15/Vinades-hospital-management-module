@@ -6,8 +6,8 @@ if (!defined('NV_MAINFILE')) {
 
 $module_version = [
     'name' => 'qlbenhvien',  // ✅ PHẢI TRÙNG với tên thư mục
-    'modfuncs' => 'main,booking', // hoặc 'main,booking' tùy bạn đặt tên file
-    'submenu' => 'booking',       // hoặc 'booking'
+    'modfuncs' => 'main,booking,historyBooking', // hoặc 'main,booking' tùy bạn đặt tên file
+    'submenu' => 'booking,historyBooking',
     'is_sysmod' => 0,
     'virtual' => 1,
     'version' => '4.5.01',
@@ -15,8 +15,8 @@ $module_version = [
     'author' => 'Do Dang Hoan <dodanghoan@example.com>',
     'note' => 'Module quản lý bệnh viện - đặt lịch khám',
     'uploads_dir' => [
-        $module_name,
-        $module_name . '/doctors'
+        'qlbenhvien',
+        'qlbenhvien/doctors'
     ],
     'files_dir' => []
 ];
