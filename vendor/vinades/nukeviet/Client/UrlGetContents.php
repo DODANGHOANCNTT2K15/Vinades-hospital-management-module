@@ -41,7 +41,7 @@ class UrlGetContents
      */
     public function __construct($global_config, $time_limit = 60)
     {
-        $this->user_agent = 'NUKEVIET CMS ' . $global_config['version'] . '. Developed by VINADES. Url: http://nukeviet.vn. Code: ' . md5($global_config['sitekey']);
+        $this->user_agent = 'NUKEVIET CMS ' . $global_config['version'] . '. Developed by VINADES. Url: https://nukeviet.vn. Code: ' . md5($global_config['sitekey']);
 
         $disable_functions = (ini_get('disable_functions') != '' and ini_get('disable_functions') != false) ? array_map('trim', preg_split("/[\s,]+/", ini_get('disable_functions'))) : [];
         if (extension_loaded('suhosin')) {

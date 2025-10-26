@@ -245,4 +245,14 @@ $(document).ready(function() {
             stickyTable();
         }, 210);
     });
+
+    // Xử lý Ckeditor 5 bị tràn nếu đặt trong bảng
+    $('[data-toggle="outerNvCkeditor5"]').each(function() {
+        let tbl = $(this).closest('table');
+        if (tbl.length) {
+            tbl.css({
+                'table-layout': 'fixed'
+            });
+        }
+    });
 });

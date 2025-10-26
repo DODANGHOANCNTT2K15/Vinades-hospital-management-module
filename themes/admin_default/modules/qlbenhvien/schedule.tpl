@@ -1,8 +1,52 @@
 <!-- BEGIN: main -->
+<style>
+.page-header {
+    margin-top:0px;
+    margin-bottom: 20px;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: nowrap;
+}
 
+.page-header h2 {
+    margin: 0;
+    font-size: 20px;
+    color: #2b6cb0;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.page-header .btn-success {
+    background-color: #38a169;
+    border: none;
+    transition: background 0.2s ease, transform 0.1s ease;
+    font-weight: 500;
+    padding: 8px 14px;
+    border-radius: 6px;
+}
+
+.page-header .btn-success:hover {
+    background-color: #2f855a;
+}
+
+.row_data:hover{
+    background-color: #4079b5ff !important;
+    color: white;
+}
+</style>
 <!-- BEGIN: list -->
-<h2>Danh sách lịch khám</h2>
-<a href="{ADD_LINK}" class="btn btn-primary mb-3">+ Thêm lịch mới</a>
+<div class="page-header">
+    <h2>Danh sách lịch khám</h2>
+    <a href="{ADD_LINK}" class="btn btn-success">
+        <i class="fa fa-plus"></i> Thêm lịch khám
+    </a>
+</div>
+
+
 <table class="table table-striped table-bordered">
 <thead>
 <tr>
@@ -12,98 +56,41 @@
     <th>Ngày</th>
     <th>Giờ</th>
     <th>Trạng thái</th>
-    <th>Ghi chú</th>
-    <th>Hành động</th>
 </tr>
 </thead>
 <tbody>
 <!-- BEGIN: row -->
-<tr>
+<tr onclick="window.location='{ROW.link_detail}'" style="cursor:pointer;" class="row_data">
     <td>{ROW.id}</td>
     <td>{ROW.ten_benhnhan}</td>
     <td>{ROW.ten_bacsi}</td>
     <td>{ROW.ngaykham}</td>
     <td>{ROW.giokham}</td>
     <td>{ROW.trangthai_text}</td>
-    <td>{ROW.ghichu}</td>
-    <td>
-        <a href="{ROW.link_edit}">Sửa</a> |
-        <a href="{ROW.link_delete}" onclick="return confirm('Xóa lịch này?')">Xóa</a>
-    </td>
 </tr>
 <!-- END: row -->
 </tbody>
 </table>
-<!-- END: list -->
+<!-- BEGIN: total_info -->
+<div class="mb-2 text-muted">{TOTAL_INFO}</div>
+<!-- END: total_info -->
 
-<!-- BEGIN: add -->
-<h3>Thêm lịch khám</h3>
-<!-- BEGIN: message -->
-<p style="color:green;">{MESSAGE}</p>
-<!-- END: message -->
+<!-- BEGIN: pagination -->
+<div class="text-center mt-3">{NV_GENERATE_PAGE}</div>
+<!-- END: pagination -->
 
-<form method="post" action="{FORM_ACTION}">
-    <p>
-        <label>Bệnh nhân:
-            <select name="benhnhan_id" required>
-                <option value="">-- Chọn bệnh nhân --</option>
-                <!-- BEGIN: benhnhan -->
-                <option value="{BN.id}">{BN.hoten}</option>
-                <!-- END: benhnhan -->
-            </select>
-        </label>
-    </p>
+<!-- BEGIN: detail -->
+<h3>Chi tiết lịch khám #{ROW.id}</h3>
+<p><strong>Bệnh nhân:</strong> {ROW.ten_benhnhan}</p>
+<p><strong>Bác sĩ:</strong> {ROW.ten_bacsi}</p>
+<p><strong>Ngày khám:</strong> {ROW.ngaykham_vn}</p>
+<p><strong>Giờ khám:</strong> {ROW.giokham}</p>
+<p><strong>Trạng thái:</strong> {ROW.trangthai_text}</p>
+<p><strong>Ghi chú:</strong> {ROW.ghichu}</p>
 
-    <p>
-        <label>Bác sĩ:
-            <select name="bacsi_id">
-                <option value="0">-- Chưa chọn bác sĩ --</option>
-                <!-- BEGIN: bacsi -->
-                <option value="{BS.id}">{BS.hoten}</option>
-                <!-- END: bacsi -->
-            </select>
-        </label>
-    </p>
+<a href="index.php?nv={MODULE_NAME}&op=schedule" class="btn btn-secondary mt-3">← Quay lại danh sách</a>
+<!-- END: detail -->
 
-    <p><label>Ngày khám: <input type="date" name="ngaykham" required></label></p>
-    <p><label>Giờ khám: <input type="time" name="giokham" required></label></p>
-    <p><label>Ghi chú: <textarea name="ghichu" rows="3" cols="50"></textarea></label></p>
-
-    <button type="submit" name="submit">Thêm lịch</button>
-</form>
-<!-- END: add -->
-
-<!-- BEGIN: edit -->
-<h3>Cập nhật lịch khám</h3>
-<!-- BEGIN: message -->
-<p style="color:green;">{MESSAGE}</p>
-<!-- END: message -->
-
-<form method="post" action="{FORM_ACTION}">
-    <p>Bệnh nhân ID: <strong>{ROW.benhnhan_id}</strong></p>
-
-    <p><label>Bác sĩ:
-        <select name="bacsi_id">
-            <option value="0">-- Chưa chọn bác sĩ --</option>
-            <!-- BEGIN: bacsi -->
-            <option value="{BS.id}" {BS.selected}>{BS.hoten}</option>
-            <!-- END: bacsi -->
-        </select>
-    </label></p>
-
-    <p><label>Trạng thái:
-        <select name="trangthai">
-            <option value="pending" {ROW.pending}>Chờ xác nhận</option>
-            <option value="confirmed" {ROW.confirmed}>Đã xác nhận</option>
-            <option value="cancelled" {ROW.cancelled}>Đã hủy</option>
-        </select>
-    </label></p>
-
-    <p><label>Ghi chú: <input type="text" name="ghichu" value="{ROW.ghichu}"></label></p>
-
-    <button type="submit" name="save">Lưu thay đổi</button>
-</form>
-<!-- END: edit -->
 
 <!-- BEGIN: error -->
 <p style="color:red;">{MESSAGE}</p>

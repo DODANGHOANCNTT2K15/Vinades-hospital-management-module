@@ -7,103 +7,119 @@ namespace Composer\Autoload;
 class ComposerStaticInit261687c3e3cd870899aff0ad8589f210
 {
     public static $files = array (
+        '7b11c4dc42b3b3023073cb14e519683c' => __DIR__ . '/..' . '/ralouphie/getallheaders/src/getallheaders.php',
         '0e6d7bf4a5811bfa5cf40c5ccd6fae6a' => __DIR__ . '/..' . '/symfony/polyfill-mbstring/bootstrap.php',
+        'a0edc8309cc5e1d60e3047b5df6b7052' => __DIR__ . '/..' . '/guzzlehttp/psr7/src/functions_include.php',
     );
 
     public static $prefixLengthsPsr4 = array (
-        'T' =>
+        'T' => 
         array (
             'TrueBV\\' => 7,
         ),
-        'S' =>
+        'S' => 
         array (
             'Symfony\\Polyfill\\Mbstring\\' => 26,
         ),
-        'P' =>
+        'P' => 
         array (
+            'Psr\\Http\\Message\\' => 17,
             'PHPMailer\\PHPMailer\\' => 20,
         ),
-        'O' =>
+        'O' => 
         array (
             'OAuth\\' => 6,
         ),
-        'N' =>
+        'N' => 
         array (
             'NukeViet\\Module\\' => 16,
             'NukeViet\\Api\\' => 13,
             'NukeViet\\' => 9,
         ),
-        'L' =>
+        'L' => 
         array (
             'League\\Url\\' => 11,
         ),
-        'C' =>
+        'G' => 
+        array (
+            'GuzzleHttp\\Psr7\\' => 16,
+        ),
+        'C' => 
         array (
             'Com\\Tecnick\\Color\\' => 18,
             'Com\\Tecnick\\Barcode\\' => 20,
         ),
+        'B' => 
+        array (
+            'Buzz\\' => 5,
+        ),
     );
 
     public static $prefixDirsPsr4 = array (
-        'TrueBV\\' =>
+        'TrueBV\\' => 
         array (
             0 => __DIR__ . '/..' . '/true/punycode/src',
         ),
-        'Symfony\\Polyfill\\Mbstring\\' =>
+        'Symfony\\Polyfill\\Mbstring\\' => 
         array (
             0 => __DIR__ . '/..' . '/symfony/polyfill-mbstring',
         ),
-        'PHPMailer\\PHPMailer\\' =>
+        'Psr\\Http\\Message\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/psr/http-message/src',
+        ),
+        'PHPMailer\\PHPMailer\\' => 
         array (
             0 => __DIR__ . '/..' . '/phpmailer/phpmailer/src',
         ),
-        'OAuth\\' =>
+        'OAuth\\' => 
         array (
             0 => __DIR__ . '/..' . '/and/oauth/src',
         ),
-        'NukeViet\\Module\\' =>
+        'NukeViet\\Module\\' => 
         array (
             0 => __DIR__ . '/../..' . '/modules',
         ),
-        'NukeViet\\Api\\' =>
+        'NukeViet\\Api\\' => 
         array (
             0 => __DIR__ . '/../..' . '/includes/api',
         ),
-        'NukeViet\\' =>
+        'NukeViet\\' => 
         array (
             0 => __DIR__ . '/..' . '/vinades/nukeviet',
         ),
-        'League\\Url\\' =>
+        'League\\Url\\' => 
         array (
             0 => __DIR__ . '/..' . '/league/url/src',
         ),
-        'Com\\Tecnick\\Color\\' =>
+        'GuzzleHttp\\Psr7\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/guzzlehttp/psr7/src',
+        ),
+        'Com\\Tecnick\\Color\\' => 
         array (
             0 => __DIR__ . '/..' . '/tecnickcom/tc-lib-color/src',
         ),
-        'Com\\Tecnick\\Barcode\\' =>
+        'Com\\Tecnick\\Barcode\\' => 
         array (
             0 => __DIR__ . '/..' . '/tecnickcom/tc-lib-barcode/src',
+        ),
+        'Buzz\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/kriswallsmith/buzz/lib/Buzz',
         ),
     );
 
     public static $prefixesPsr0 = array (
-        'G' =>
+        'G' => 
         array (
-            'Gregwar\\Image' =>
+            'Gregwar\\Image' => 
             array (
                 0 => __DIR__ . '/..' . '/gregwar/image',
             ),
-            'Gregwar\\Cache' =>
+            'Gregwar\\Cache' => 
             array (
                 0 => __DIR__ . '/..' . '/gregwar/cache',
-            ),
-        ),
-        'B' =>
-        array (
-            'Buzz' =>
-            array (
-                0 => __DIR__ . '/..' . '/kriswallsmith/buzz/lib',
             ),
         ),
     );

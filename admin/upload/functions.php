@@ -149,6 +149,9 @@ function nv_check_allow_upload_dir($dir)
             $level['rotate_file'] = true;
         }
     }
+    if (empty($level)) {
+        return [];
+    }
 
     // Tự động chèn logo
     $level['auto_logo'] = false;

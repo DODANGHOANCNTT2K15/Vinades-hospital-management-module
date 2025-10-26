@@ -157,6 +157,11 @@
                     <td></td>
                     <td><label><input type="checkbox" name="adduser_email" value="1"{DATA.adduser_email}/> <small>{LANG.adduser_email1_note1}</small></label></td>
                 </tr>
+                <tr>
+                    <td>{LANG.force_logout}</td>
+                    <td></td>
+                    <td><label><input type="checkbox" name="force_logout" value="1"> <small>{LANG.force_logout1}</small></label></td>
+                </tr>
             </tbody>
         </table>
         <!-- BEGIN: field -->
@@ -237,6 +242,9 @@
                 <tr>
                     <td> {LANG.repassword} </td>
                     <td><input class="form-control" type="password" name="password2" autocomplete="new-password" value="{DATA.password2}" style="width: 300px" id="password2" /><input id="methods" type="checkbox">{LANG.show_password}</td>
+                </tr>
+                <tr>
+                    <td colspan="2"><i>{LANG.edit_password_note2}</i></td>
                 </tr>
             </tbody>
         </table>

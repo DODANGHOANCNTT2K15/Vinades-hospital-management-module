@@ -319,6 +319,7 @@ class Request
         }
 
         if ($ip2long == -1 or $ip2long === false) {
+            http_response_code(403);
             trigger_error(Request::INCORRECT_IP, 256);
         }
         $this->ip_addr = $ip2long;
@@ -387,7 +388,10 @@ class Request
             $array_keys = array_keys($_COOKIE);
             foreach ($array_keys as $k) {
                 if (!preg_match('/^[a-zA-Z0-9\_]+$/', $k) or is_numeric($k)) {
-                    @setcookie($k, '', NV_CURRENTTIME - 3600);
+                    // Name cannot contain = , ; [space] /t /r /n /013 /014
+                    if (!preg_match('/[\,\=\; \t\r\n\x0D\x0E]+/', $k)) {
+                        setcookie($k, '', NV_CURRENTTIME - 3600);
+                    }
                     unset($_COOKIE[$k]);
                 }
             }
@@ -499,6 +503,7 @@ class Request
                 $this->isIpValid = true;
             }
             if (!(($this->isRefererValid and (empty($this->origin) or $this->isOriginValid)) or $this->isIpValid)) {
+                http_response_code(403);
                 trigger_error(Request::REQUEST_BLOCKED, 256);
             }
         }
@@ -542,6 +547,7 @@ class Request
                  * Nếu sai thì từ chối truy vấn
                  */
                 unset($_SERVER['HTTP_ORIGIN']);
+                http_response_code(403);
                 trigger_error(Request::INCORRECT_ORIGIN, 256);
             }
         } else {
@@ -633,6 +639,7 @@ class Request
     private function sessionStart($https_only)
     {
         if (headers_sent() or connection_status() != 0 or connection_aborted()) {
+            http_response_code(500);
             trigger_error(Request::IS_HEADERS_SENT, 256);
         }
 
@@ -723,7 +730,7 @@ class Request
     /**
      * unhtmlentities()
      *
-     * @param tring $value
+     * @param string $value
      * @return string
      */
     private function unhtmlentities($value)
@@ -1659,7 +1666,7 @@ class Request
      * get_typed_array()
      *
      * @param string      $name
-     * @param strig|null  $mode
+     * @param string|null  $mode
      * @param string|null $type
      * @param mixed|null  $default
      * @param bool        $specialchars

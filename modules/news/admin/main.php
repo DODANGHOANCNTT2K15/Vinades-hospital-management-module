@@ -185,13 +185,16 @@ $array_status_view = [
     '3' => $lang_module['status_3']
 ];
 $array_status_class = [
-    '5' => 'danger',
+    '5' => 'info',
     '1' => '',
     '0' => 'warning',
-    '6' => 'warning',
+    '6' => 'danger',
     '4' => 'info',
     '2' => 'success',
-    '3' => 'danger'
+    '3' => 'danger',
+    '7' => '',
+    '8' => 'info',
+    '9' => 'danger'
 ];
 
 $_permission_action = [];
@@ -540,18 +543,23 @@ if (($module_config[$module_name]['elas_use'] == 1) and $checkss == NV_CHECK_SES
                             if ($status) {
                                 $_permission_action['exptime'] = true;
                             }
-                        } elseif ($array_cat_admin[$admin_id][$catid_i]['pub_content'] == 1 and $status == 0) {
+                        } elseif ($array_cat_admin[$admin_id][$catid_i]['pub_content'] == 1 and ($status == 0 or $status == 8 or $status == 9 or $status == 2)) {
+                            // Quyền đăng bài và bài đang dừng, chuyển đăng, từ chối đăng, hẹn đăng
                             ++$check_edit;
                             $_permission_action['publtime'] = true;
                             $_permission_action['re-published'] = true;
-                        } elseif (($status == 0 or $status == 4 or $status == 5) and $post_id == $admin_id) {
+                        } elseif ($array_cat_admin[$admin_id][$catid_i]['app_content'] == 1 and ($status == 5 or $status == 6)) {
+                            // Bài chờ duyệt thì được xử lý trong quá trình duyệt
+                            ++$check_edit;
+                        } elseif (($status == 0 or $status == 4 or $status == 5 or $status == 6) and $post_id == $admin_id) {
+                            // Bài của mình đăng, đang đình chỉ chờ duyệt, đã duyệt thì được sửa và chuyển lại chờ duyệt
                             ++$check_edit;
                             $_permission_action['waiting'] = true;
                         }
 
                         if ($array_cat_admin[$admin_id][$catid_i]['del_content'] == 1) {
                             ++$check_del;
-                        } elseif (($status == 0 or $status == 4 or $status == 5) and $post_id == $admin_id) {
+                        } elseif (($status == 0 or $status == 4 or $status == 5 or $status == 6) and $post_id == $admin_id) {
                             ++$check_del;
                             $_permission_action['waiting'] = true;
                         }
@@ -748,20 +756,23 @@ if (($module_config[$module_name]['elas_use'] == 1) and $checkss == NV_CHECK_SES
                             if ($status) {
                                 $_permission_action['exptime'] = true;
                             }
-                        } elseif ($array_cat_admin[$admin_id][$catid_i]['pub_content'] == 1 and ($status == 0 or $status == 8 or $status == 2)) {
+                        } elseif ($array_cat_admin[$admin_id][$catid_i]['pub_content'] == 1 and ($status == 0 or $status == 8 or $status == 9 or $status == 2)) {
+                            // Quyền đăng bài và bài đang dừng, chuyển đăng, từ chối đăng, hẹn đăng
                             ++$check_edit;
                             $_permission_action['publtime'] = true;
                             $_permission_action['re-published'] = true;
-                        } elseif ($array_cat_admin[$admin_id][$catid_i]['app_content'] == 1 and $status == 5) {
+                        } elseif ($array_cat_admin[$admin_id][$catid_i]['app_content'] == 1 and ($status == 5 or $status == 6)) {
+                            // Bài chờ duyệt thì được xử lý trong quá trình duyệt
                             ++$check_edit;
-                        } elseif (($status == 0 or $status == 4 or $status == 5) and $post_id == $admin_id) {
+                        } elseif (($status == 0 or $status == 4 or $status == 5 or $status == 6) and $post_id == $admin_id) {
+                            // Bài của mình đăng, đang đình chỉ chờ duyệt, đã duyệt thì được sửa và chuyển lại chờ duyệt
                             ++$check_edit;
                             $_permission_action['waiting'] = true;
                         }
 
                         if ($array_cat_admin[$admin_id][$catid_i]['del_content'] == 1) {
                             ++$check_del;
-                        } elseif (($status == 0 or $status == 4 or $status == 5) and $post_id == $admin_id) {
+                        } elseif (($status == 0 or $status == 4 or $status == 5 or $status == 6) and $post_id == $admin_id) {
                             ++$check_del;
                             $_permission_action['waiting'] = true;
                         }
@@ -865,8 +876,7 @@ foreach ($arr_search_date as $key => $val) {
 $order2 = ($order == 'asc') ? 'desc' : 'asc';
 $ord_sql = ' r.' . $ordername . ' ' . $order;
 
-$array_editdata = [];
-$internal_authors = [];
+$array_editdata = $internal_authors = [];
 
 if (!empty($array_ids)) {
     // Lấy số tags
@@ -903,6 +913,16 @@ if (!empty($array_ids)) {
             'href' => NV_BASE_ADMINURL . 'index.php?' . NV_LANG_VARIABLE . '=' . NV_LANG_DATA . '&amp;' . NV_NAME_VARIABLE . '=' . $module_name . '&amp;q=' . urlencode($_row['alias']) . '&amp;stype=author&amp;checkss=' . NV_CHECK_SESSION,
             'pseudonym' => $_row['pseudonym']
         ];
+    }
+
+    // Xác định lý do từ chối bài viết
+    $db_slave->sqlreset()
+        ->select('id, reject_reason')
+        ->from(NV_PREFIXLANG . '_' . $module_data . '_detail')
+        ->where('id IN (' . implode(',', $array_ids) . ')');
+    $result = $db_slave->query($db_slave->sql());
+    while ($_row = $result->fetch()) {
+        $data[$_row['id']]['reject_reason'] = $_row['reject_reason'];
     }
 }
 
@@ -1090,6 +1110,11 @@ foreach ($data as $row) {
         if ($loadhistory == $row['id']) {
             $loadhistory_id = $row['id'];
         }
+    }
+
+    // Hiển thị nguyên nhân từ chối bài viết
+    if (in_array($row['status_id'], [6, 9], true) and !empty($row['reject_reason'])) {
+        $xtpl->parse('main.loop.reject_reason');
     }
 
     $xtpl->parse('main.loop');

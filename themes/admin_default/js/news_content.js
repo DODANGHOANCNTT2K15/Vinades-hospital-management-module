@@ -396,14 +396,6 @@ $(document).ready(function() {
         $('#adv-form').collapse('hide');
     }
 
-    $('input[name="open_source"]').change(function() {
-        if ($(this).is(':checked')) {
-            $('#content_bodytext_required').addClass('hidden');
-        } else {
-            $('#content_bodytext_required').removeClass('hidden');
-        }
-    });
-
     // Duy trì trạng thái sửa bài viết
     if (typeof CFG.is_edit_news != "undefined" && CFG.is_edit_news == true) {
         timer_check_takeover = setTimeout(function() {
@@ -411,9 +403,26 @@ $(document).ready(function() {
         }, 10000);
     }
 
+    // Toggle trạng thái bắt buộc của nội dung bài viết
+    function checkReqBHtml() {
+        const form = $('#form-news-content');
+        const reqBHtml = (trim($('[name="sourcetext"]', form).val()) == ''|| !$('[name="external_link"]', form).is(':checked')) ? true : false;
+        if (reqBHtml) {
+            $('#content_bodytext_required').show();
+            return;
+        }
+        $('#content_bodytext_required').hide();
+    }
+    $('[name="external_link"]').on('change', function() {
+        checkReqBHtml();
+    });
+    $('#AjaxSourceText').on('change', function() {
+        checkReqBHtml();
+    });
+
     // Kiểm tra form đăng bài viết
-    $('#form-news-content').on('submit', function(e) {
-        let form = $(this);
+    function validateContentForm(e) {
+        let form = $('#form-news-content');
         $(".has-error", form).removeClass("has-error");
 
         // Tiêu đề bài viết
@@ -423,7 +432,7 @@ $(document).ready(function() {
             $(".tooltip-current", form).removeClass("tooltip-current");
             $(iptTitle).addClass("tooltip-current").attr("data-current-mess", $(iptTitle).attr("data-mess"));
             nv_validErrorShow(iptTitle);
-            return;
+            return false;
         }
 
         // Chuyên mục
@@ -435,32 +444,69 @@ $(document).ready(function() {
             $('html,body').animate({
                 scrollTop: $("#show_error").offset().top
             }, 200);
-            return;
+            return false;
         }
+
+        const reqBHtml = (trim($('[name="sourcetext"]', form).val()) == ''|| !$('[name="external_link"]', form).is(':checked')) ? true : false;
 
         // Nội dung bài viết
         let editorid = form.data('mdata') + '_bodyhtml';
         if (typeof CKEDITOR != "undefined" && CKEDITOR.instances[editorid]) {
-            if (trim(CKEDITOR.instances[editorid].getData()) == '') {
+            if (reqBHtml && trim(CKEDITOR.instances[editorid].getData()) == '') {
                 e.preventDefault();
                 $(form).find("#show_error").css('display', 'block');
                 $("#show_error", form).html(form.data('ebodytext'));
                 $('html,body').animate({
                     scrollTop: $("#show_error").offset().top
                 }, 200);
-                return;
+                return false;
             }
         }
         if (typeof window.nveditor != "undefined" && window.nveditor[editorid]) {
-            if (trim(window.nveditor[editorid].getData()) == '') {
+            if (reqBHtml && trim(window.nveditor[editorid].getData()) == '') {
                 e.preventDefault();
                 $(form).find("#show_error").css('display', 'block');
                 $("#show_error", form).html(form.data('ebodytext'));
                 $('html,body').animate({
                     scrollTop: $("#show_error").offset().top
                 }, 200);
-                return;
+                return false;
             }
+        }
+
+        return true;
+    }
+
+    $('#form-news-content').on('submit', function(e) {
+        validateContentForm(e);
+    });
+
+    // Xử lý từ chối bài viết
+    const mReject = $('#modal-confirm-reject');
+    $('.submit-reject').on('click', function(e) {
+        e.preventDefault();
+        // Kiểm tra form trước khi nhập lí do từ chối
+        const checkForm = validateContentForm(e);
+        if (checkForm) {
+            mReject.append('<input type="hidden" id="reject_status_tmp" name="status' + $(this).data('type') + '" value="1">');
+            mReject.modal('show');
+        }
+    });
+    mReject.on('shown.bs.modal', function() {
+        $('#reject_reason').focus();
+    });
+    mReject.on('hide.bs.modal', function() {
+        const iptSubmit = $('#reject_status_tmp');
+        if (iptSubmit.length) {
+            iptSubmit.remove();
+        }
+    });
+    $('[name="save_reject"]').on('click', function(e) {
+        if (trim($('#reject_reason').val()) == '') {
+            e.preventDefault();
+            $('#reject_reason').focus();
+            alert($(this).data('error'));
+            return false;
         }
     });
 });

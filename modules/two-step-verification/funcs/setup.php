@@ -98,6 +98,7 @@ if ($checkss == NV_CHECK_SESSION) {
         $message = sprintf($lang_module['email_2step_on'], $m_time, NV_CLIENT_IP, NV_USER_AGENT, $user_info['username'], $m_link, $global_config['site_name']);
         nv_sendmail('', $user_info['email'], $lang_module['email_subject'], $message);
     } catch (Exception $e) {
+        http_response_code(500);
         trigger_error('Error active 2-step Auth!!!', 256);
     }
 
@@ -110,7 +111,7 @@ if ($checkss == NV_CHECK_SESSION) {
     ]);
 }
 
-$canonicalUrl = getCanonicalUrl($page_url, true, true);
+$canonicalUrl = getCanonicalUrl($page_url);
 
 $contents = nv_theme_config_2step($secretkey, $nv_redirect);
 
