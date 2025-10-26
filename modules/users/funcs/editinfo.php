@@ -245,6 +245,9 @@ $array_data['awaitinginfo'] = [];
 $array_data['editcensor'] = $global_users_config['active_editinfo_censor'];
 $checkss = $nv_Request->get_title('checkss', 'post', '');
 if (isset($array_op[2]) and !defined('ACCESS_EDITUS')) {
+    if (empty($_POST)) {
+        nv_redirect_location(NV_BASE_SITEURL . 'index.php?' . NV_LANG_VARIABLE . '=' . NV_LANG_DATA . '&' . NV_NAME_VARIABLE . '=' . $module_name);
+    }
     nv_jsonOutput([
         'status' => 'error',
         'input' => '',
@@ -1148,7 +1151,7 @@ if ($checkss == $array_data['checkss'] and $array_data['type'] == 'basic') {
 $page_title = $mod_title = $lang_module['editinfo_pagetitle'];
 $key_words = $module_info['keywords'];
 $page_url .= '/' . $array_data['type'];
-$canonicalUrl = getCanonicalUrl($page_url, true);
+$canonicalUrl = getCanonicalUrl($page_url);
 
 if (!defined('NV_EDITOR')) {
     define('NV_EDITOR', 'ckeditor5-classic');

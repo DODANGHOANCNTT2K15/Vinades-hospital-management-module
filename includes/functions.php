@@ -771,7 +771,7 @@ function nv_user_in_groups($groups_view)
 }
 
 /**
- * nv_groups_add_user()
+ * Thêm thành viên vào nhóm
  *
  * @param int    $group_id
  * @param int    $userid
@@ -784,37 +784,58 @@ function nv_groups_add_user($group_id, $userid, $approved = 1, $mod_data = 'user
     global $db, $db_config, $global_config;
     $_mod_table = ($mod_data == 'users') ? NV_USERS_GLOBALTABLE : $db_config['prefix'] . '_' . $mod_data;
     $query = $db->query('SELECT COUNT(*) FROM ' . $_mod_table . ' WHERE userid=' . $userid);
-    if ($query->fetchColumn()) {
-        try {
-            $db->query('INSERT INTO ' . $_mod_table . '_groups_users (
-                group_id, userid, approved, data, time_requested, time_approved
-            ) VALUES (
-                ' . $group_id . ', ' . $userid . ', ' . $approved . ", '" . $global_config['idsite'] . "',
-                " . NV_CURRENTTIME . ', ' . ($approved ? NV_CURRENTTIME : 0) . '
-            )');
-            if ($approved) {
-                $db->query('UPDATE ' . $_mod_table . '_groups SET numbers = numbers+1 WHERE group_id=' . $group_id);
-            }
-
-            return true;
-        } catch (PDOException $e) {
-            if ($group_id <= 3) {
-                $data = $db->query('SELECT data FROM ' . $_mod_table . '_groups_users WHERE group_id=' . $group_id . ' AND userid=' . $userid)->fetchColumn();
-                $data = ($data != '') ? explode(',', $data) : [];
-                $data[] = $global_config['idsite'];
-                $data = implode(',', array_unique(array_map('intval', $data)));
-                $db->query('UPDATE ' . $_mod_table . "_groups_users SET data = '" . $data . "' WHERE group_id=" . $group_id . ' AND userid=' . $userid);
-
-                return true;
-            }
-        }
+    if (!$query->fetchColumn()) {
+        return false;
     }
 
-    return false;
+    try {
+        $db->query('INSERT INTO ' . $_mod_table . '_groups_users (
+            group_id, userid, approved, data, time_requested, time_approved
+        ) VALUES (
+            ' . $group_id . ', ' . $userid . ', ' . $approved . ", '" . $global_config['idsite'] . "',
+            " . NV_CURRENTTIME . ', ' . ($approved ? NV_CURRENTTIME : 0) . '
+        )');
+        if ($approved) {
+            $db->query('UPDATE ' . $_mod_table . '_groups SET numbers = numbers+1 WHERE group_id=' . $group_id);
+        }
+    } catch (PDOException $e) {
+        if ($group_id > 3) {
+            return false;
+        }
+
+        $data = $db->query('SELECT data FROM ' . $_mod_table . '_groups_users WHERE group_id=' . $group_id . ' AND userid=' . $userid)->fetchColumn();
+        $data = ($data != '') ? explode(',', $data) : [];
+        $data[] = $global_config['idsite'];
+        $data = implode(',', array_unique(array_map('intval', $data)));
+        $db->query('UPDATE ' . $_mod_table . "_groups_users SET data = '" . $data . "' WHERE group_id=" . $group_id . ' AND userid=' . $userid);
+    }
+
+    // Cập nhật lại danh sách nhóm cho user
+    if ($approved) {
+        $sql = "SELECT group_id FROM " . $_mod_table . "_groups_users WHERE userid=" . $userid . " AND approved=1";
+        $in_groups = $db->query($sql)->fetchAll(PDO::FETCH_COLUMN);
+        $in_groups = array_map('intval', $in_groups);
+
+        // Loại bỏ nhóm mới nếu thêm quản trị hoặc thành viên chính thức
+        if (in_array($group_id, [1, 2, 3, 4])) {
+            $in_groups = array_diff($in_groups, [7]);
+        }
+        // Luôn luôn bổ sung nhóm thành viên chính thức nếu không phải thành viên mới
+        if (!in_array(7, $in_groups)) {
+            $in_groups[] = 4;
+        }
+
+        $in_groups = array_unique($in_groups);
+        $in_groups = empty($in_groups) ? '' : implode(',', $in_groups);
+
+        $db->query('UPDATE ' . $_mod_table . ' SET in_groups = ' . $db->quote($in_groups) . ' WHERE userid=' . $userid);
+    }
+
+    return true;
 }
 
 /**
- * nv_groups_del_user()
+ * Loại bỏ thành viên khỏi nhóm
  *
  * @param int    $group_id
  * @param int    $userid
@@ -827,32 +848,67 @@ function nv_groups_del_user($group_id, $userid, $mod_data = 'users')
 
     $_mod_table = ($mod_data == 'users') ? NV_USERS_GLOBALTABLE : $db_config['prefix'] . '_' . $mod_data;
     $row = $db->query('SELECT data, approved FROM ' . $_mod_table . '_groups_users WHERE group_id=' . $group_id . ' AND userid=' . $userid)->fetch();
-    if (!empty($row)) {
-        $set_number = false;
-        if ($group_id > 3) {
-            $set_number = true;
-        } else {
-            $data = str_replace(',' . $global_config['idsite'] . ',', '', ',' . $row['data'] . ',');
-            $data = trim($data, ',');
-            if ($data == '') {
-                $set_number = true;
-            } else {
-                $db->query('UPDATE ' . $_mod_table . "_groups_users SET data = '" . $data . "' WHERE group_id=" . $group_id . ' AND userid=' . $userid);
-            }
-        }
-
-        if ($set_number) {
-            $db->query('DELETE FROM ' . $_mod_table . '_groups_users WHERE group_id = ' . $group_id . ' AND userid = ' . $userid);
-
-            if ($row['approved']) {
-                $db->query('UPDATE ' . $_mod_table . '_groups SET numbers = numbers-1 WHERE group_id=' . $group_id);
-            }
-        }
-
-        return true;
+    if (empty($row)) {
+        return false;
     }
 
-    return false;
+    $sql = 'SELECT userid, group_id FROM ' . $_mod_table . ' WHERE userid=' . $userid;
+    $user = $db->query($sql)->fetch();
+    if (empty($user)) {
+        return false;
+    }
+
+    $set_number = false;
+    if ($group_id > 3) {
+        $set_number = true;
+    } else {
+        $data = str_replace(',' . $global_config['idsite'] . ',', '', ',' . $row['data'] . ',');
+        $data = trim($data, ',');
+        if ($data == '') {
+            $set_number = true;
+        } else {
+            $db->query('UPDATE ' . $_mod_table . "_groups_users SET data = '" . $data . "' WHERE group_id=" . $group_id . ' AND userid=' . $userid);
+        }
+    }
+
+    if ($set_number) {
+        $db->query('DELETE FROM ' . $_mod_table . '_groups_users WHERE group_id = ' . $group_id . ' AND userid = ' . $userid);
+
+        if ($row['approved']) {
+            $db->query('UPDATE ' . $_mod_table . '_groups SET numbers = numbers-1 WHERE group_id=' . $group_id);
+        }
+    }
+
+    // Cập nhật lại danh sách nhóm cho user
+    $sql = "SELECT group_id FROM " . $_mod_table . "_groups_users WHERE userid=" . $userid . " AND approved=1";
+    $in_groups = $db->query($sql)->fetchAll(PDO::FETCH_COLUMN);
+    $in_groups = array_map('intval', $in_groups);
+
+    // Xử lý lại nhóm chính nếu xóa khỏi nhóm này
+    $new_group_id = $user['group_id'];
+    if ($new_group_id == $group_id) {
+        $new_group_id = 4;
+
+        // Tìm nhóm chính theo luật ưu tiên thành viên mới => quản trị cấp tăng dần, mặc định thành viên chính thức
+        $groups = [7, 3, 2, 1];
+        foreach ($groups as $g) {
+            if (in_array($g, $in_groups, true)) {
+                $new_group_id = $g;
+            }
+        }
+    }
+
+    // Luôn luôn bổ sung nhóm thành viên chính thức nếu không phải thành viên mới
+    if (!in_array(7, $in_groups)) {
+        $in_groups[] = 4;
+    }
+
+    $in_groups = array_unique($in_groups);
+    $in_groups = empty($in_groups) ? '' : implode(',', $in_groups);
+
+    $db->query('UPDATE ' . $_mod_table . ' SET in_groups = ' . $db->quote($in_groups) . ', group_id=' . $new_group_id . ' WHERE userid=' . $userid);
+
+    return true;
 }
 
 /**
@@ -1783,7 +1839,7 @@ function nv_alias_page($title, $base_url, $num_items, $per_page, $on_page, $add_
     } else {
         for ($i = 2; $i < $total_pages + 1; ++$i) {
             if ($i == $on_page) {
-                $page_string .= '<li' . $li_active_class . '><a' . $a_class . ' href="javascript:void(0)">' . $i . '</a><li>';
+                $page_string .= '<li' . $li_active_class . '><a' . $a_class . ' href="javascript:void(0)">' . $i . '</a></li>';
             } else {
                 $rel = ($i > $on_page) ? 'next' : 'prev';
                 $page_string .= '<li' . $li_class . '><a' . $a_class . ' rel="' . $rel . '" title="' . $title . ' ' . $i . '" href="' . $base_url . '/page-' . $i . '">' . $i . '</a></li>';
@@ -1823,8 +1879,11 @@ function nv_alias_page($title, $base_url, $num_items, $per_page, $on_page, $add_
  */
 function getPageUrl($page_url, $query_check, $abs_comp)
 {
+    // Rewrite $page_url và cắt domain nếu nó tồn tại
     $url_rewrite = nv_url_rewrite($page_url, true);
     str_starts_with($url_rewrite, NV_MY_DOMAIN) && $url_rewrite = substr($url_rewrite, strlen(NV_MY_DOMAIN));
+
+    // Phân tích url đã rewrite được ra path và query
     $url_rewrite_check = str_replace('&amp;', '&', $url_rewrite);
     $url_rewrite_check = urldecode($url_rewrite_check);
     $url_rewrite_check = preg_replace_callback('/[^:\/@?&=#]+/usD', function ($matches) {
@@ -1834,7 +1893,8 @@ function getPageUrl($page_url, $query_check, $abs_comp)
     $url_parts['path'] = urldecode($url_parts['path']);
     !isset($url_parts['query']) && $url_parts['query'] = '';
 
-    $request_uri = nv_url_rewrite($_SERVER['REQUEST_URI'], true);
+    // Xử lý $_SERVER['REQUEST_URI'] cắt domain nếu nó tồn tại, phân tích ra path và query
+    $request_uri = $_SERVER['REQUEST_URI'];
     str_starts_with($request_uri, NV_MY_DOMAIN) && $request_uri = substr($request_uri, strlen(NV_MY_DOMAIN));
     $request_parts = parse_url($request_uri);
     $request_parts['path'] = urldecode($request_parts['path']);
@@ -1867,7 +1927,7 @@ function getPageUrl($page_url, $query_check, $abs_comp)
 }
 
 /**
- * getCanonicalUrl()
+ * Lấy biến canonical URL và kiểm soát việc chuyển hướng
  *
  * @param string $page_url    Đường dẫn tuyệt đối từ thư mục gốc đến trang
  * @param bool   $query_check So sánh query của $page_url với query của $_SERVER['REQUEST_URI']
@@ -1879,13 +1939,19 @@ function getCanonicalUrl($page_url, $query_check = false, $abs_comp = false)
     global $home;
 
     if ($home) {
+        // Cắt tên miền nếu nó tồn tại trong $page_url
         $page_url = nv_url_rewrite(NV_BASE_SITEURL . 'index.php?' . NV_LANG_VARIABLE . '=' . NV_LANG_DATA, true);
         str_starts_with($page_url, NV_MY_DOMAIN) && $page_url = substr($page_url, strlen(NV_MY_DOMAIN));
 
-        $request_uri = nv_url_rewrite($_SERVER['REQUEST_URI'], true);
+        // Cắt tên miền nếu nó tồn tại trong $_SERVER['REQUEST_URI']
+        $request_uri = $_SERVER['REQUEST_URI'];
         str_starts_with($request_uri, NV_MY_DOMAIN) && $request_uri = substr($request_uri, strlen(NV_MY_DOMAIN));
+        if (!$query_check) {
+            $request_uri = preg_replace('/\?.*/', '', $request_uri);
+        }
 
-        if ($request_uri != NV_BASE_SITEURL and $request_uri != $page_url) {
+        $check_url = $query_check ? $page_url : preg_replace('/\?.*/', '', $page_url);
+        if ($request_uri != NV_BASE_SITEURL and $request_uri != $check_url) {
             nv_redirect_location($page_url);
         }
 
@@ -2389,6 +2455,7 @@ function nv_change_buffer($buffer)
             $_google_analytics .= "ga('create', '" . $global_config['googleAnalyticsID'] . "', '" . $global_config['cookie_domain'] . "');" . PHP_EOL;
         }
         if (defined('GOOGLE_ANALYTICS_SYSTEM')) {
+            /** @disregard P1011 */
             $_google_analytics .= "ga('create', '" . GOOGLE_ANALYTICS_SYSTEM . "', 'auto');" . PHP_EOL;
         }
         $_google_analytics .= "ga('send', 'pageview');" . PHP_EOL;

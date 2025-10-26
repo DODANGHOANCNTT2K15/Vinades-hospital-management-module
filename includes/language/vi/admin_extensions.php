@@ -101,7 +101,7 @@ $lang_module['download_ok'] = 'Tải file thành công, hệ thống sẽ chuy�
 
 $lang_module['login_pagetitle'] = 'Đăng nhập Merchant Site';
 $lang_module['login_require'] = 'Chức năng này yêu cầu bạn phải đăng nhập. Nhấp <a href="%s">Vào đây</a> để đăng nhập';
-$lang_module['login_creat_merchant'] = 'Nếu chưa có tài khoản, click <a href="http://nukeviet.vn/store/merchant/manager/">Vào đây</a> để tạo';
+$lang_module['login_creat_merchant'] = 'Nếu chưa có tài khoản, click <a href="https://nukeviet.vn/store/merchant/manager/">Vào đây</a> để tạo';
 $lang_module['login_success'] = 'Đăng nhập thành công, hệ thống sẽ chuyển trang trong giây lát';
 
 $lang_module['extUpd'] = 'Nâng cấp ứng dụng';
@@ -165,7 +165,7 @@ $lang_module['autoinstall_unzip_setuppage'] = 'Đến trang quản lý ứng d�
 $lang_module['autoinstall_unzip_filelist'] = 'Danh sách file đã giải nén';
 $lang_module['autoinstall_error_movefile'] = 'Việc cài đặt tự động không thể tiếp tục do host không hỗ trợ di chuyển các file sau khi giải nén.';
 $lang_module['autoinstall_error_missing_cfg'] = 'File tải lên không hợp lệ vui lòng kiểm tra lại cách thức đóng gói ứng dụng';
-$lang_module['autoinstall_error_cfg_content'] = 'Gói ứng dụng không đầy đủ thông tin, vui lòng kiểmt tra lại';
+$lang_module['autoinstall_error_cfg_content'] = 'Gói ứng dụng không đầy đủ thông tin, vui lòng kiểm tra lại';
 $lang_module['autoinstall_error_cfg_type'] = 'Loại ứng dụng không xác định';
 $lang_module['autoinstall_error_cfg_version'] = 'Phiên bản ứng dụng không hợp lệ';
 $lang_module['autoinstall_error_cfg_name'] = 'Tên ứng dụng theo loại ứng dụng không đúng chuẩn quy định';

@@ -70,6 +70,7 @@ $lang_module['captcha_'] = 'Không sử dụng';
 $lang_module['captcha_captcha'] = 'Captcha hình';
 $lang_module['captcha_recaptcha'] = 'reCaptcha';
 $lang_module['captcha_type_recaptcha_note'] = 'reCaptcha sẽ bị thay bằng Captcha hình cho đến khi bạn khai báo Site key và Secret key của reCaptcha';
+$lang_module['captcha_type_recaptcha_note1'] = '. Vui lòng liên hệ bộ phận hỗ trợ nếu bạn cần sitekey hoặc recaptcha không hoạt động';
 $lang_module['select_all_as'] = 'Chọn tất cả là';
 $lang_module['captcha_area'] = 'Khu vực áp dụng captcha của module Thành viên';
 $lang_module['captcha_area_a'] = 'Admin đăng nhập';
@@ -151,7 +152,7 @@ $lang_module['proxy_blocker_2'] = 'Kiểm tra vừa';
 $lang_module['proxy_blocker_3'] = 'Kiểm tra tuyệt đối';
 $lang_module['str_referer_blocker'] = 'Kích hoạt tiện ích kiểm tra và chuyển hướng các REFERER bên ngoài đến trang chủ';
 $lang_module['my_domains'] = 'Các domain chạy site, cách nhau bởi dấu phảy';
-$lang_module['searchEngineUniqueID'] = 'Google search Engine ID<br />(Có dạng 000329275761967753447:sr7yxqgv294 , <a href="http://nukeviet.vn/vi/faq/Su-dung-Google-Custom-Search-tren-NukeViet/" target="_blank">xem chi tiết</a>)';
+$lang_module['searchEngineUniqueID'] = 'Google search Engine ID<br />(Có dạng 000329275761967753447:sr7yxqgv294 , <a href="https://nukeviet.vn/vi/faq/Su-dung-Google-Custom-Search-tren-NukeViet/" target="_blank">xem chi tiết</a>)';
 
 $lang_module['variables'] = 'Cấu hình cookie session';
 $lang_module['cookie_prefix'] = 'Tiến tố cookie';

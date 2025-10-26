@@ -104,7 +104,7 @@ class Http extends Server
             'redirection' => 5,
             'requested' => 0,  // Number requested if redirection
             'httpversion' => 1.0,
-            'user-agent' => 'NUKEVIET CMS ' . Http::$site_config['version'] . '. Developed by VINADES. Url: http://nukeviet.vn. Code: ' . md5(Http::$site_config['sitekey']),
+            'user-agent' => 'NUKEVIET CMS ' . Http::$site_config['version'] . '. Developed by VINADES. Url: https://nukeviet.vn. Code: ' . md5(Http::$site_config['sitekey']),
             'referer' => null,
             'reject_unsafe_urls' => false,
             'blocking' => true,

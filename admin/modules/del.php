@@ -38,6 +38,9 @@ if (!empty($modname) and preg_match($global_config['check_module'], $modname) an
             $lang = NV_LANG_DATA;
             $sql_drop_module = [];
 
+            if (!defined('NV_MODULE_DELETE')) {
+                define('NV_MODULE_DELETE', true);
+            }
             require_once NV_ROOTDIR . '/modules/' . $module_file . '/action_' . $db->dbtype . '.php';
 
             if (!empty($sql_drop_module)) {
@@ -91,6 +94,9 @@ if (!empty($modname) and preg_match($global_config['check_module'], $modname) an
         $sth = $db->prepare('DELETE FROM ' . NV_CONFIG_GLOBALTABLE . " WHERE lang='" . NV_LANG_DATA . "' AND module= :module");
         $sth->bindParam(':module', $modname, PDO::PARAM_STR);
         $sth->execute();
+
+        // Xóa vị trí block tùy chỉnh
+        nv_purge_blocks($modname);
 
         $check_exit_mod = false;
 

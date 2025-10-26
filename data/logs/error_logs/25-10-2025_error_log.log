@@ -1,4 +1,0 @@
-[Sat, 25 Oct 2025 18:31:19 +0700] [localhost] [::1] [Warning(2): imagecreatefrompng(): gd-png: libpng warning: iCCP: known incorrect sRGB profile] [FILE: /includes/core/statimg.php] [LINE: 27] [TRACE:]
-#1  LINE: 102   FILE: /index.php
-#2  LINE: 27    FILE: /includes/core/statimg.php
-

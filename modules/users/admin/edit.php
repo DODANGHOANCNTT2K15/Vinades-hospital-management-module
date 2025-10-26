@@ -116,6 +116,7 @@ if ($nv_Request->isset_request('confirm', 'post')) {
     $_user['delpic'] = $nv_Request->get_int('delpic', 'post', 0);
     $_user['is_official'] = $nv_Request->get_int('is_official', 'post', 0);
     $_user['adduser_email'] = $nv_Request->get_int('adduser_email', 'post', 0);
+    $_user['force_logout'] = (int) $nv_Request->get_bool('force_logout', 'post', false);
 
     $custom_fields = $nv_Request->get_array('custom_fields', 'post');
     $custom_fields['first_name'] = $_user['first_name'];
@@ -346,7 +347,7 @@ if ($nv_Request->isset_request('confirm', 'post')) {
         view_mail=' . $_user['view_mail'] . ",
         in_groups='" . implode(',', $in_groups) . "',
         email_verification_time=" . $email_verification_time . ',
-        last_update=' . NV_CURRENTTIME . '
+        last_update=' . NV_CURRENTTIME . (!empty($_user['force_logout']) ? ", checknum=''" : '') . '
     WHERE userid=' . $userid);
 
     if (!empty($query_field)) {
