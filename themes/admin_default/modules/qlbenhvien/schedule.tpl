@@ -71,26 +71,46 @@
 <!-- END: row -->
 </tbody>
 </table>
-<!-- BEGIN: total_info -->
 <div class="mb-2 text-muted">{TOTAL_INFO}</div>
-<!-- END: total_info -->
-
 <!-- BEGIN: pagination -->
 <div class="text-center mt-3">{NV_GENERATE_PAGE}</div>
 <!-- END: pagination -->
+<!-- END: list -->
 
 <!-- BEGIN: detail -->
-<h3>Chi tiết lịch khám #{ROW.id}</h3>
-<p><strong>Bệnh nhân:</strong> {ROW.ten_benhnhan}</p>
-<p><strong>Bác sĩ:</strong> {ROW.ten_bacsi}</p>
-<p><strong>Ngày khám:</strong> {ROW.ngaykham_vn}</p>
-<p><strong>Giờ khám:</strong> {ROW.giokham}</p>
-<p><strong>Trạng thái:</strong> {ROW.trangthai_text}</p>
-<p><strong>Ghi chú:</strong> {ROW.ghichu}</p>
+<div class="page-header">
+    <h2>Chi tiết lịch khám #{ROW.id}</h2>
+    <a href="{BACK_LINK}" class="btn btn-secondary">
+        ← Quay lại danh sách
+    </a>
+</div>
 
-<a href="index.php?nv={MODULE_NAME}&op=schedule" class="btn btn-secondary mt-3">← Quay lại danh sách</a>
+<table class="table table-bordered">
+    <tr><th>ID</th><td>{ROW.id}</td></tr>
+    <tr><th>Bệnh nhân</th><td>{ROW.ten_benhnhan}</td></tr>
+    <tr><th>Bác sĩ</th><td>{ROW.ten_bacsi}</td></tr>
+    <tr><th>Ngày khám</th><td>{ROW.ngaykham_vn}</td></tr>
+    <tr><th>Giờ khám</th><td>{ROW.giokham}</td></tr>
+    <tr><th>Trạng thái</th><td>{ROW.trangthai_text}</td></tr>
+    <tr><th>Ghi chú</th><td>{ROW.ghichu}</td></tr>
+</table>
+
+<div class="mt-3">
+    <a href="{LINK_CONFIRM}" class="btn btn-success">
+        <i class="fa fa-check"></i> Xác nhận
+    </a>
+    <a href="{LINK_CANCEL}" class="btn btn-warning">
+        <i class="fa fa-times"></i> Hủy lịch
+    </a>
+    <a href="{LINK_EDIT}" class="btn btn-primary">
+        <i class="fa fa-edit"></i> Sửa thông tin
+    </a>
+    <a href="{LINK_DELETE}" class="btn btn-danger"
+       onclick="return confirm('Bạn có chắc muốn xóa lịch khám này không?');">
+        <i class="fa fa-trash"></i> Xóa
+    </a>
+</div>
 <!-- END: detail -->
-
 
 <!-- BEGIN: error -->
 <p style="color:red;">{MESSAGE}</p>
