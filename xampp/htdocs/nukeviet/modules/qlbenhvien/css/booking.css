@@ -1,0 +1,173 @@
+.booking-page {
+  max-width: 700px;
+  margin: 40px auto;
+  margin-top: 0px;
+  padding: 30px;
+  background: #ffffff;
+  border-radius: 20px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+  font-family: "Segoe UI", Roboto, Arial, sans-serif;
+  color: #333;
+}
+
+.booking-page h2 {
+  text-align: center;
+  color: #0077cc;
+  margin-bottom: 25px;
+  font-weight: 600;
+  font-size: 2rem;
+}
+
+/* --- Phần thông tin bệnh nhân --- */
+.patient-info {
+  background: #f4f9ff;
+  border: 1px solid #d4e6ff;
+  border-radius: 14px;
+  padding: 20px 25px;
+  margin-bottom: 25px;
+  box-shadow: inset 0 0 10px rgba(0, 102, 204, 0.05);
+}
+
+.patient-info h3 {
+  color: #0f81e6;
+  margin-top: 0;
+  font-size: 1.5rem;
+  margin-bottom: 12px;
+  border-bottom: 2px solid #d4e6ff;
+  padding-bottom: 6px;
+}
+
+.patient-info p {
+  margin: 10px 0;
+  line-height: 1.5;
+  font-size: 1.2rem;
+}
+
+.patient-info strong {
+  color: #0059b3;
+}
+
+/* --- Form đặt lịch khám --- */
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+form label {
+  font-weight: 600;
+  color: #333;
+  font-size: 1.2rem;
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 5px;
+}
+
+input[type="date"],
+input[type="time"],
+textarea {
+  margin-top: 6px;
+  padding: 10px 14px;
+  border: 1px solid #cfd8dc;
+  border-radius: 10px;
+  font-size: 1.2rem;
+  transition: all 0.25s ease;
+  background-color: #f9fcff;
+  box-shadow: inset 0 2px 5px rgba(0, 0, 0, 0.03);
+}
+
+input[type="date"]:focus,
+input[type="time"]:focus,
+textarea:focus {
+  border-color: #0077cc;
+  box-shadow: 0 0 0 4px rgba(0, 119, 204, 0.15);
+  outline: none;
+  background-color: #fff;
+}
+
+textarea {
+  resize: vertical;
+  min-height: 80px;
+}
+
+/* --- Nút đặt lịch --- */
+button[type="submit"] {
+  padding: 12px 20px;
+  background: linear-gradient(135deg, #007bff, #0059b3);
+  color: #fff;
+  font-weight: 600;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  font-size: 1.2rem;
+  transition: all 0.3s ease;
+  letter-spacing: 0.3px;
+}
+
+button[type="submit"]:hover {
+  background: linear-gradient(135deg, #0059b3, #003d80);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 10px rgba(0, 85, 170, 0.3);
+}
+
+button[type="submit"]:active {
+  transform: translateY(0);
+  box-shadow: none;
+}
+
+/* --- Dropdown chọn ngày --- */
+select {
+  margin-top: 6px;
+  padding: 10px 14px;
+  border: 1px solid #cfd8dc;
+  border-radius: 10px;
+  font-size: 1.2rem;
+  background-color: #f9fcff;
+  box-shadow: inset 0 2px 5px rgba(0, 0, 0, 0.03);
+  transition: all 0.25s ease;
+}
+
+select:focus {
+  border-color: #0077cc;
+  box-shadow: 0 0 0 4px rgba(0, 119, 204, 0.15);
+  outline: none;
+  background-color: #fff;
+}
+
+/* --- Thông báo lỗi / notice --- */
+.booking-page p[style*="color:red"] {
+  background-color: #ffecec;
+  border-left: 4px solid #f44336;
+  color: #b30000 !important;
+  padding: 12px 15px;
+  border-radius: 10px;
+  font-weight: 600;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+/* --- Hiệu ứng hover option trong select (nếu muốn) --- */
+select option:hover {
+  background-color: #e6f0ff;
+}
+
+/* --- Cải thiện spacing giữa label và input --- */
+form label {
+  margin-bottom: 8px;
+}
+
+
+/* --- Responsive --- */
+@media (max-width: 600px) {
+  .booking-page {
+    padding: 20px;
+  }
+
+  .booking-page h2 {
+    font-size: 1.5rem;
+  }
+
+  .patient-info h3 {
+    font-size: 1.1rem;
+  }
+}

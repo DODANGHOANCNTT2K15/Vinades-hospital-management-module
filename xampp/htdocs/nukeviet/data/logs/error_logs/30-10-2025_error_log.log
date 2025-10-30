@@ -1,0 +1,3 @@
+[Thu, 30 Oct 2025 21:49:06 +0700] [localhost] [::1] [User Notice(1024): SQLSTATE[HY000] [1045] Access denied for user 'quantri'@'localhost' (using password: YES)] [FILE: /vendor/vinades/nukeviet/Core/Database.php] [LINE: 95]
+[Thu, 30 Oct 2025 21:59:51 +0700] [localhost] [::1] [Warning(2): imagecreatefrompng(): gd-png: libpng warning: iCCP: known incorrect sRGB profile] [FILE: /vendor/vinades/nukeviet/Files/Image.php] [LINE: 215]
+[Fri, 31 Oct 2025 01:29:35 +0700] [localhost] [::1] [Warning(2): file_get_contents(D:/xampp/htdocs/nukeviet/themes/default/modules/qlbenhvien\main.tpl): Failed to open stream: No such file or directory] [FILE: /includes/xtemplate.class.php] [LINE: 1333]
