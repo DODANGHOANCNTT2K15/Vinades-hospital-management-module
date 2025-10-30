@@ -1,0 +1,136 @@
+/* --- Container lịch sử --- */
+.lich-history-page {
+  max-width: 800px;
+  margin: 30px auto;
+  margin-top: 0px;
+  padding: 20px;
+  font-family: "Segoe UI", Roboto, Arial, sans-serif;
+  color: #333;
+}
+
+/* Tiêu đề */
+.lich-history-page h2 {
+  text-align: center;
+  font-size: 2rem;
+  color: #0077cc;
+  margin-bottom: 25px;
+  font-weight: 600;
+}
+
+/* Thông báo chưa có lịch */
+.lich-history-page .alert {
+  padding: 15px 20px;
+  border-radius: 12px;
+  background: #e6f2ff;
+  color: #0077cc;
+  border: 1px solid #b3d1ff;
+  text-align: center;
+  font-size: 1.2rem;
+}
+
+/* Card lịch khám */
+.lichkham-card {
+  border: 1px solid #ddd;
+  border-radius: 12px;
+  padding: 18px 20px;
+  margin-bottom: 18px;
+  background: #fafafa;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+  transition: all 0.3s ease;
+}
+
+.lichkham-card:hover {
+  box-shadow: 0 6px 20px rgba(0,0,0,0.08);
+  transform: translateY(-2px);
+}
+
+/* Header card */
+.lichkham-card div:first-child {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.lichkham-card div:first-child strong {
+  font-size: 1.2rem;
+  color: #0059b3;
+}
+
+.lichkham-card div:first-child span {
+  padding: 4px 10px;
+  border-radius: 8px;
+  font-size: 1.2rem;
+  color: #fff;
+  text-transform: capitalize;
+}
+
+/* Trạng thái */
+.lichkham-card .pending { background: #ff9800; }
+.lichkham-card .confirmed { background: #4caf50; }
+.lichkham-card .cancelled { background: #f44336; }
+
+/* Nội dung card */
+.lichkham-card p {
+  margin: 6px 0;
+  font-size: 1.2rem;
+}
+
+.lichkham-card p strong {
+  color: #0077cc;
+}
+
+.status{
+    font-weight: bold;
+}
+
+/* --- Responsive --- */
+@media (max-width: 600px) {
+  .lich-history-page {
+    padding: 15px;
+  }
+
+  .lich-history-page h2 {
+    font-size: 1.5rem;
+  }
+
+  .lichkham-card {
+    padding: 15px;
+  }
+
+  .lichkham-card p {
+    font-size: 0.95rem;
+  }
+}
+
+/* --- Pagination --- */
+.pagination {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 20px;
+  gap: 10px;
+}
+
+.pagination a {
+  display: inline-block;
+  padding: 8px 14px;
+  border-radius: 8px;
+  text-decoration: none;
+  color: #0077cc;
+  border: 1px solid #b3d1ff;
+  font-weight: 500;
+  transition: all 0.3s ease;
+}
+
+.pagination a:hover {
+  background: #0077cc;
+  color: #fff;
+  border-color: #0059b3;
+}
+
+.pagination a.prev,
+.pagination a.next {
+  font-weight: 600;
+}
+
