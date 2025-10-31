@@ -1,0 +1,16 @@
+[Fri, 31 Oct 2025 08:49:10 +0700] [localhost] [::1] [Error(1): Uncaught PDOException: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'nukeviet.nv4_sessions' doesn't exist in C:\xampp\htdocs\nukeviet\vendor\vinades\nukeviet\Core\Database.php:581
+Stack trace:
+#0 C:\xampp\htdocs\nukeviet\vendor\vinades\nukeviet\Core\Database.php(581): PDO->prepare('UPDATE nv4_sess...', Array)
+#1 C:\xampp\htdocs\nukeviet\includes\core\online.php(33): NukeViet\Core\Database->prepare('UPDATE nv4_sess...')
+#2 C:\xampp\htdocs\nukeviet\includes\core\online.php(49): nv_online_upd()
+#3 C:\xampp\htdocs\nukeviet\index.php(54): require('C:\\xampp\\htdocs...')
+#4 {main}
+  thrown] [FILE: /vendor/vinades/nukeviet/Core/Database.php] [LINE: 581]
+[Fri, 31 Oct 2025 08:49:39 +0700] [localhost] [::1] [Error(1): Uncaught PDOException: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'nukeviet.nv4_cronjobs' doesn't exist in C:\xampp\htdocs\nukeviet\vendor\vinades\nukeviet\Core\Database.php:548
+Stack trace:
+#0 C:\xampp\htdocs\nukeviet\vendor\vinades\nukeviet\Core\Database.php(548): PDO->query('SELECT * FROM n...')
+#1 C:\xampp\htdocs\nukeviet\includes\core\cronjobs.php(17): NukeViet\Core\Database->query('SELECT * FROM n...')
+#2 C:\xampp\htdocs\nukeviet\includes\mainfile.php(381): require('C:\\xampp\\htdocs...')
+#3 C:\xampp\htdocs\nukeviet\index.php(26): require('C:\\xampp\\htdocs...')
+#4 {main}
+  thrown] [FILE: /vendor/vinades/nukeviet/Core/Database.php] [LINE: 548]
