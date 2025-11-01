@@ -2,27 +2,16 @@
 # IGNORE FILES FOR NUKEVIET
 # =======================
 
-# Cache
-data/cache/
-tmp/
-logs/
+# Ignore everything by default
+*
 
-# Local configuration
-data/config/config_*.php
-config.php
-*.local.php
+# But keep these folders
+!/modules/
+!/themes/
 
-# Uploads & user files
-uploads/
-files/
+# Keep .gitignore itself
+!.gitignore
 
-# IDE / System files
-.vscode/
-.idea/
-.DS_Store
-Thumbs.db
-
-# Misc
-*.log
-*.bak
-*.swp
+# Inside modules and themes, keep everything
+modules/**
+themes/**
