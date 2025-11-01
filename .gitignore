@@ -1,0 +1,28 @@
+# =======================
+# IGNORE FILES FOR NUKEVIET
+# =======================
+
+# Cache
+data/cache/
+tmp/
+logs/
+
+# Local configuration
+data/config/config_*.php
+config.php
+*.local.php
+
+# Uploads & user files
+uploads/
+files/
+
+# IDE / System files
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+
+# Misc
+*.log
+*.bak
+*.swp
