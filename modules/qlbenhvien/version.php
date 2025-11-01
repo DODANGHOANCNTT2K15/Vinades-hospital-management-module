@@ -6,8 +6,8 @@ if (!defined('NV_MAINFILE')) {
 
 $module_version = [
     'name' => 'qlbenhvien',  // ✅ PHẢI TRÙNG với tên thư mục
-    'modfuncs' => 'main,booking,historyBooking', // hoặc 'main,booking' tùy bạn đặt tên file
-    'submenu' => 'booking,historyBooking',
+    'modfuncs' => 'main,booking,historyBooking,doctor', // hoặc 'main,booking' tùy bạn đặt tên file
+    'submenu' => 'booking,historyBooking,doctor',
     'is_sysmod' => 0,
     'virtual' => 1,
     'version' => '4.5.01',

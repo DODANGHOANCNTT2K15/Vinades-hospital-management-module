@@ -1,0 +1,142 @@
+/* Container chính */
+.doctor-page {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 30px 20px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: #f7f8fa;
+}
+
+/* Tiêu đề */
+.doctor-page h2 {
+    text-align: center;
+    color: #2b6cb0;
+    font-size: 28px;
+    margin-bottom: 25px;
+    font-weight: 600;
+}
+
+/* Form tìm kiếm */
+.search-form {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-bottom: 25px;
+    justify-content: center;
+}
+
+.search-form input,
+.search-form select {
+    padding: 8px 12px;
+    font-size: 15px;
+    border: 1px solid #d1d5db;
+    border-radius: 6px;
+    outline: none;
+    transition: all 0.2s;
+}
+
+.search-form input:focus,
+.search-form select:focus {
+    border-color: #2b6cb0;
+    box-shadow: 0 0 5px rgba(43,108,176,0.3);
+}
+
+.search-form button {
+    padding: 8px 16px;
+    border: none;
+    background-color: #2b6cb0;
+    color: #fff;
+    font-weight: 500;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.search-form button:hover {
+    background-color: #1e4f8f;
+}
+
+/* Danh sách bác sĩ */
+.doctor-list {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+/* Card bác sĩ */
+.doctor-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 15px;
+    background: #fff;
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.doctor-item:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.12);
+}
+
+/* Hình bác sĩ */
+.doctor-item img {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid #2b6cb0;
+}
+
+/* Thông tin bác sĩ */
+.doctor-item .info {
+    flex: 1;
+}
+
+.doctor-item h3 {
+    margin: 0 0 8px;
+    color: #2b6cb0;
+    font-size: 20px;
+    font-weight: 600;
+}
+
+.doctor-item p {
+    margin: 4px 0;
+    color: #555;
+    font-size: 14px;
+}
+
+.doctor-item p strong {
+    color: #333;
+}
+
+/* Pagination */
+.pagination {
+    margin-top: 30px;
+    text-align: center;
+}
+
+.pagination a {
+    display: inline-block;
+    margin: 0 4px;
+    padding: 6px 12px;
+    border: 1px solid #d1d5db;
+    border-radius: 6px;
+    text-decoration: none;
+    color: #333;
+    font-size: 14px;
+    transition: all 0.2s;
+}
+
+.pagination a:hover {
+    background-color: #2b6cb0;
+    color: #fff;
+    border-color: #2b6cb0;
+}
+
+.pagination a.active {
+    background-color: #2b6cb0;
+    color: #fff;
+    border-color: #2b6cb0;
+}
