@@ -41,9 +41,62 @@
 <!-- BEGIN: list -->
 <div class="page-header">
     <h2>Danh sách lịch khám</h2>
-    <a href="{ADD_LINK}" class="btn btn-success">
-        <i class="fa fa-plus"></i> Thêm lịch khám
-    </a>
+
+    <div style="display:flex; align-items:center; gap:10px;">
+        <!-- Nút mở popup lọc -->
+        <button type="button" class="btn btn-info" onclick="openFilterPopup()">
+            <i class="fa fa-filter"></i> Bộ lọc
+        </button>
+
+        <a href="{ADD_LINK}" class="btn btn-success">
+            <i class="fa fa-plus"></i> Thêm lịch khám
+        </a>
+
+        <div id="filterPopup" class="modal"
+            style="display:none; position:fixed; inset:0; background:rgba(0,0,0,0.4); z-index:999; align-items:center; justify-content:center;">
+        <div style="background:#fff; padding:20px; border-radius:8px; width:400px;">
+            <h4 style="margin-top:0;">Lọc lịch khám</h4>
+            <form method="get" action="{NV_BASE_ADMINURL}index.php">
+            <input type="hidden" name="nv" value="{MODULE_NAME}">
+            <input type="hidden" name="op" value="schedule">
+
+            <div class="form-group mb-2">
+                <label>Bệnh nhân:</label>
+                <select name="benhnhan_id" class="form-control">
+                <option value="0">-- Tất cả --</option>
+                <!-- BEGIN: benhnhan -->
+                <option value="{BENHNHAN.id}" {BENHNHAN.selected}>{BENHNHAN.hoten}</option>
+                <!-- END: benhnhan -->
+                </select>
+            </div>
+
+            <div class="form-group mb-2">
+                <label>Bác sĩ:</label>
+                <select name="bacsi_id" class="form-control">
+                <option value="0">-- Tất cả --</option>
+                <!-- BEGIN: bacsi -->
+                <option value="{BACSI.id}" {BACSI.selected}>{BACSI.hoten}</option>
+                <!-- END: bacsi -->
+                </select>
+            </div>
+            
+            <div style="text-align:right;">
+                <button type="submit" class="btn btn-primary">Áp dụng</button>
+                <button type="button" class="btn btn-secondary" onclick="closeFilterPopup()">Đóng</button>
+            </div>
+            </form>
+        </div>
+        </div>
+
+        <script>
+        function openFilterPopup() {
+            document.getElementById('filterPopup').style.display = 'flex';
+        }
+        function closeFilterPopup() {
+            document.getElementById('filterPopup').style.display = 'none';
+        }
+        </script>
+    </div>
 </div>
 
 
@@ -56,6 +109,7 @@
     <th>Ngày</th>
     <th>Giờ</th>
     <th>Trạng thái</th>
+    <th>Hành động</th>
 </tr>
 </thead>
 <tbody>
@@ -67,8 +121,22 @@
     <td>{ROW.ngaykham}</td>
     <td>{ROW.giokham}</td>
     <td>{ROW.trangthai_text}</td>
+    <td style="text-align:center;">
+        <a href="{ROW.link_edit}" class="btn btn-primary btn-sm">
+            <i class="fa fa-edit"></i> Sửa
+        </a>
+        <a href="{ROW.link_delete}" class="btn btn-danger btn-sm"
+           onclick="return confirm('Bạn có chắc muốn xóa lịch khám này không?');">
+            <i class="fa fa-trash"></i> Xóa
+        </a>
+    </td>
 </tr>
 <!-- END: row -->
+
+<!-- BEGIN: no_data -->
+<tr><td colspan="8" class="text-center text-muted">Không có dữ liệu lịch khám.</td></tr>
+<!-- END: no_data -->
+
 </tbody>
 </table>
 <div class="mb-2 text-muted">{TOTAL_INFO}</div>

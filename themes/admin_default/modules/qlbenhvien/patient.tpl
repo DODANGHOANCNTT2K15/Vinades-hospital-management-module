@@ -33,6 +33,15 @@
 <!-- BEGIN: list -->
 <div class="page-header">
     <h2>Danh sách bệnh nhân</h2>
+
+    <form method="get" action="" style="display:flex; align-items:center; gap:6px;">
+        <input type="hidden" name="nv" value="{MODULE_NAME}">
+        <input type="hidden" name="op" value="patient">
+        <input type="text" name="keyword" placeholder="Tìm theo tên bệnh nhân" value="{KEYWORD}" class="form-control" style="width: 300px;">
+        <button type="submit" class="btn btn-primary">Tìm</button>
+        <a href="index.php?nv={MODULE_NAME}&op=patient" class="btn btn-secondary">Tất cả</a>
+    </form>
+
     <a href="{ADD_LINK}" class="btn btn-success"><i class="fa fa-plus"></i> Thêm bệnh nhân</a>
 </div>
 
@@ -76,6 +85,10 @@
     </td>
 </tr>
 <!-- END: row -->
+
+<!-- BEGIN: no_data -->
+<tr><td colspan="8" class="text-center text-muted">Không có bệnh nhân nào.</td></tr>
+<!-- END: no_data -->
 </tbody>
 </table>
 
