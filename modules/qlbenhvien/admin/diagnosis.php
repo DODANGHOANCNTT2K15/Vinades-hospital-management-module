@@ -69,6 +69,7 @@ $sql = "
     FROM $table_schedule AS lk
     JOIN " . $db_config['prefix'] . "_ql_benhvien_benhnhan AS bn ON lk.benhnhan_id = bn.id
     JOIN " . $db_config['prefix'] . "_ql_benhvien_bacsi AS bs ON lk.bacsi_id = bs.id
+    WHERE lk.trangthai = 'confirmed'  -- chỉ lấy lịch đã xác nhận
     ORDER BY lk.ngaykham DESC
 ";
 
