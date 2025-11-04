@@ -40,10 +40,17 @@
     <!-- Pagination -->
     <!-- BEGIN: pagination -->
     <div class="pagination">
-        <!-- BEGIN: page -->
-        <a href="{PAGE.link}" class="{PAGE.active}">{PAGE.num}</a>
-        <!-- END: page -->
+        <!-- BEGIN: prev -->
+        <a href="{PAGE.prev_link}" class="prev">&laquo; Trước</a>
+        <!-- END: prev -->
+
+        <span class="page-info">Trang {CURRENT_PAGE} / {TOTAL_PAGES}</span>
+
+        <!-- BEGIN: next -->
+        <a href="{PAGE.next_link}" class="next">Sau &raquo;</a>
+        <!-- END: next -->
     </div>
     <!-- END: pagination -->
+
 </div>
 <!-- END: main -->

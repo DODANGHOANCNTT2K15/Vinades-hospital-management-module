@@ -8,7 +8,7 @@ $keyword = $nv_Request->get_title('keyword', 'get', '');
 $chuyenkhoa_id = $nv_Request->get_int('chuyenkhoa_id', 'get', 0);
 $page = $nv_Request->get_int('page', 'get', 1); // trang hiện tại
 
-$limit = 10; // số bác sĩ/trang
+$limit = 3; // số bác sĩ/trang
 $offset = ($page - 1) * $limit;
 
 // --- Bảng ---
@@ -98,6 +98,49 @@ foreach ($ds_bacsi as $bs) {
 // Phân trang
 $xtpl->assign('CURRENT_PAGE', $page);
 $xtpl->assign('TOTAL_PAGES', $total_pages);
+
+// --- Tạo danh sách phân trang ---
+// --- Pagination (Prev / Next) ---
+if ($total_pages > 1) {
+    $base_url = NV_BASE_SITEURL . 'index.php?' . NV_NAME_VARIABLE . '=' . $module_name . '&' . NV_OP_VARIABLE . '=doctor';
+    if (!empty($keyword)) {
+        $base_url .= '&keyword=' . urlencode($keyword);
+    }
+    if ($chuyenkhoa_id > 0) {
+        $base_url .= '&chuyenkhoa_id=' . $chuyenkhoa_id;
+    }
+
+    $pagination = [];
+    $hasPrev = false;
+    $hasNext = false;
+
+    if ($page > 1) {
+        $pagination['prev_link'] = $base_url . '&page=' . ($page - 1);
+        $hasPrev = true;
+    }
+
+    if ($page < $total_pages) {
+        $pagination['next_link'] = $base_url . '&page=' . ($page + 1);
+        $hasNext = true;
+    }
+
+    // Gán biến vào template
+    $xtpl->assign('PAGE', $pagination);
+    $xtpl->assign('CURRENT_PAGE', $page);
+    $xtpl->assign('TOTAL_PAGES', $total_pages);
+
+    // Parse các block con trong đúng thứ tự
+    if ($hasPrev) {
+        $xtpl->parse('main.pagination.prev');
+    }
+    if ($hasNext) {
+        $xtpl->parse('main.pagination.next');
+    }
+
+    // Cuối cùng parse block pagination
+    $xtpl->parse('main.pagination');
+}
+
 
 $xtpl->parse('main.list');
 $xtpl->parse('main');
