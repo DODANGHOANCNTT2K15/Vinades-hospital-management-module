@@ -35,26 +35,37 @@
 - **Cơ sở dữ liệu:** MySQL  
 - **Giao diện quản trị:** Bootstrap 4 / 5 (tùy phiên bản NukeViet)
 
----
-
-## ⚙️ Cài đặt
- 
-
----
-
 ## 🧩 Cấu trúc module
 
 ```
 modules/
 └── qlbenhvien/
     ├── admin/
-    │ ├── main.php 
-    │ ├── schedule.php 
-    │ └── ...
+    │ ├── diagnosis.php 
+    │ ├── diagnosis_detail.php 
+    │ ├── diagnosis_edit.php 
+    │ ├── diagnosis_list.php
+    │ ├── doctor.php
+    │ ├── doctor_add.php
+    │ ├── doctor_detail.php
+    │ ├── doctor_edit.php
+    │ ├── main.php
+    │ ├── patient.php
+    │ ├── patient_add.php
+    │ ├── patient_detail.php
+    │ ├── patient_edit.php
+    │ ├── schedule.php
+    │ ├── schedule_add.php
+    │ ├── schedule_edit.php
+    │ ├── specialties.php
+    │ ├── specialties_add.php
+    │ └── specialties_edit.php
     ├── funcs/
-    │ ├── main.php 
     │ ├── booking.php 
-    │ └── ...
+    │ ├── diagnosis_detail.php
+    │ ├── doctor.php 
+    │ ├── historyBooking.php  
+    │ └── main.php
     ├── language/
     │ └── vi.php
     ├── functions.php
@@ -64,6 +75,38 @@ modules/
     ├── index.html
     ├── theme.php
     └── version.php
+ 
+themes/
+├── admin_default/
+│   └── modules/
+│       └── qlbenhvien/
+│           ├── diagnosis.php 
+│           ├── diagnosis_detail.php 
+│           ├── diagnosis_edit.php 
+│           ├── diagnosis_list.php
+│           ├── doctor.php
+│           ├── doctor_add.php
+│           ├── doctor_detail.php
+│           ├── doctor_edit.php
+│           ├── main.php
+│           ├── patient.php
+│           ├── patient_add.php
+│           ├── patient_detail.php
+│           ├── patient_edit.php
+│           ├── schedule.php
+│           ├── schedule_add.php
+│           ├── schedule_edit.php
+│           ├── specialties.php
+│           ├── specialties_add.php
+│           └── specialties_edit.php
+└── default/
+    └── modules/
+        └── qlbenhvien/
+            ├── booking.php 
+            ├── diagnosis_detail.php
+            ├── doctor.php 
+            ├── historyBooking.php  
+            └── main.php
 ```
 ---
 
