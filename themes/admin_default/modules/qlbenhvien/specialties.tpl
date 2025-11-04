@@ -73,6 +73,11 @@
     </td>
 </tr>
 <!-- END: row -->
+
+<!-- BEGIN: no_data -->
+<tr><td colspan="8" class="text-center text-muted">Không có chuyên khoa nào.</td></tr>
+<!-- END: no_data -->
+
 </tbody>
 </table>
 
