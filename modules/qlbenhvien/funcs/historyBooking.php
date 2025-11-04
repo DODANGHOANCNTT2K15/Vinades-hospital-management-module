@@ -96,6 +96,16 @@ if (!empty($lichkham_list)) {
     $xtpl->parse('main.empty');
 }
 
+// URL template cho trang chẩn đoán chi tiết, trong đó :id là chỗ sẽ thay thế id lịch khám
+$diagnosis_detail_url_template = NV_BASE_SITEURL 
+    . 'index.php?' 
+    . NV_LANG_VARIABLE . '=' . NV_LANG_DATA 
+    . '&' . NV_NAME_VARIABLE . '=' . $module_name 
+    . '&' . NV_OP_VARIABLE . '=diagnosis_detail&id=';
+
+// Truyền biến này vào tpl
+$xtpl->assign('DIAGNOSIS_DETAIL_URL_TEMPLATE', $diagnosis_detail_url_template);
+
 // --- Phân trang ---
 if ($prevPage) {
     $xtpl->assign('PREV_PAGE', $prevPage);

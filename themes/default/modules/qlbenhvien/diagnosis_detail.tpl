@@ -1,0 +1,162 @@
+<!-- BEGIN: main -->
+<style>
+  .diagnosis-detail {
+    max-width: 700px;
+    margin: 40px auto 40px;
+    margin-top: 0px;
+    padding: 30px 32px;
+    background: #ffffff;
+    border-radius: 20px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+    font-family: "Segoe UI", Roboto, Arial, sans-serif;
+    color: #333;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .diagnosis-detail h2 {
+    text-align: center;
+    color: #0077cc;
+    margin-bottom: 25px;
+    font-weight: 600;
+    font-size: 2rem;
+  }
+
+  /* Bảng thông tin chẩn đoán */
+  .diagnosis-detail .info-row {
+    display: flex;
+    padding: 10px 0;
+    border-bottom: 1px solid #e0e6f1;
+    align-items: center;
+  }
+
+  .diagnosis-detail .info-row:last-child {
+    border-bottom: none;
+  }
+
+  .diagnosis-detail .info-label {
+    flex: 0 0 140px; /* chiều rộng cố định cho label */
+    font-weight: 600;
+    color: #0059b3;
+    font-size: 1.3rem;
+  }
+
+  .diagnosis-detail .info-value {
+    flex: 1;
+    font-size: 1.3rem;
+    line-height: 1.5;
+    color: #333;
+  }
+
+  .diagnosis-detail .empty-message {
+    text-align: center;
+    font-style: italic;
+    color: #888;
+    padding: 20px;
+    background-color: #f4f9ff;
+    border: 1px solid #d4e6ff;
+    border-radius: 14px;
+    box-shadow: inset 0 0 10px rgba(0, 102, 204, 0.05);
+    margin-bottom: 20px;
+  }
+
+  /* Nút quay về đặt bên phải */
+  .btn-back {
+    align-self: flex-end;
+    background-color: #0077cc;
+    color: white;
+    border: none;
+    padding: 10px 18px;
+    font-size: 1rem;
+    font-weight: 600;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    box-shadow: 0 2px 6px rgba(0, 119, 204, 0.4);
+    user-select: none;
+    margin-top: 30px;
+  }
+
+  .btn-back:hover {
+    background-color: #005fa3;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 12px rgba(0, 95, 163, 0.6);
+  }
+
+  .btn-back:active {
+    transform: translateY(0);
+    box-shadow: 0 2px 6px rgba(0, 119, 204, 0.4);
+  }
+
+  /* Responsive */
+  @media (max-width: 600px) {
+    .diagnosis-detail {
+      padding: 20px;
+      margin: 20px 10px 40px;
+    }
+
+    .diagnosis-detail h2 {
+      font-size: 1.5rem;
+      margin-bottom: 20px;
+    }
+
+    .diagnosis-detail .info-label {
+      flex: 0 0 110px;
+      font-size: 1rem;
+    }
+
+    .diagnosis-detail .info-value {
+      font-size: 1rem;
+    }
+
+    .btn-back {
+      padding: 8px 14px;
+      font-size: 0.9rem;
+      margin-top: 20px;
+    }
+  }
+</style>
+
+<div class="diagnosis-detail">
+  <h2>Chi tiết chẩn đoán</h2>
+
+  <!-- BEGIN: data -->
+  <div class="info-row">
+    <div class="info-label">Bệnh nhân:</div>
+    <div class="info-value">{DATA.benhnhan}</div>
+  </div>
+  <div class="info-row">
+    <div class="info-label">Bác sĩ:</div>
+    <div class="info-value">{DATA.bacsi}</div>
+  </div>
+  <div class="info-row">
+    <div class="info-label">Ngày khám:</div>
+    <div class="info-value">{DATA.ngaykham}</div>
+  </div>
+  <div class="info-row">
+    <div class="info-label">Ngày tạo:</div>
+    <div class="info-value">{DATA.ngaytao}</div>
+  </div>
+  <div class="info-row">
+    <div class="info-label">Chẩn đoán:</div>
+    <div class="info-value">{DATA.chandoan}</div>
+  </div>
+  <div class="info-row">
+    <div class="info-label">Đơn thuốc:</div>
+    <div class="info-value">{DATA.donthuoc}</div>
+  </div>
+  <!-- END: data -->
+
+  <!-- BEGIN: empty -->
+  <p class="empty-message">Không tìm thấy thông tin chẩn đoán.</p>
+  <!-- END: empty -->
+
+  <button class="btn-back" onclick="goBack()">← Quay về</button>
+
+<script>
+function goBack() {
+  window.history.back();
+}
+</script>
+</div>
+<!-- END: main -->

@@ -9,7 +9,7 @@
   <!-- END: empty -->
 
   <!-- BEGIN: row -->
-  <div class="lichkham-card">
+  <div class="lichkham-card" onclick="viewDiagnosis({LICH.id}, '{LICH.trangthai}')">
     <div style="display:flex; justify-content:space-between; margin-bottom:8px;">
       <strong>{LICH.ngaykham}</strong>
       <span class="status {LICH.class}">{LICH.trangthai_text}</span>
@@ -36,4 +36,16 @@
 
 
 </div>
+
+<script>
+function viewDiagnosis(id, status) {
+  if (status === 'diagnosed') {
+    const baseUrl = '{DIAGNOSIS_DETAIL_URL_TEMPLATE}';
+    window.location.href = baseUrl + id;
+  } else {
+    alert('🩺 Lịch khám này chưa được chẩn đoán.');
+  }
+}
+</script>
+
 <!-- END: main -->
