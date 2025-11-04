@@ -69,6 +69,7 @@
 .lichkham-card .pending { background: #ff9800; }
 .lichkham-card .confirmed { background: #4caf50; }
 .lichkham-card .cancelled { background: #f44336; }
+.lichkham-card .diagnosed { background: #2759b0; }
 
 /* Nội dung card */
 .lichkham-card p {

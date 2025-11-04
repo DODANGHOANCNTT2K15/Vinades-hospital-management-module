@@ -64,6 +64,10 @@ if ($benhnhan) {
                 $row['trangthai_text'] = '❌ Đã hủy';
                 $row['class'] = 'cancelled';
                 break;
+            case 'diagnosed':
+                $row['trangthai_text'] = '✅ Đã chuẩn đoán';
+                $row['class'] = 'diagnosed';
+                break;
             default:
                 $row['trangthai_text'] = '⏳ Chờ xác nhận';
                 $row['class'] = 'pending';

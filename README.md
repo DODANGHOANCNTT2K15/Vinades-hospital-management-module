@@ -72,7 +72,7 @@ modules/
 |------------|----------|-----------|
 | **Long** | Developer | Trang chủ & Hồ sơ khám bệnh |
 | **Lan** | Developer | Tra cứu bác sĩ & Quản lý bác sĩ |
-| **Hoàn** | Developer | Đặt lịch khám & Quản lý lịch khám |
+| **Hoàn** | Leader | Đặt lịch khám & Quản lý lịch khám |
 | **Khánh** | Developer | Quản lý bệnh nhân |
 
 ---
