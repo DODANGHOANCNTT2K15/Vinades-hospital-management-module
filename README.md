@@ -60,6 +60,8 @@ modules/
     │ ├── specialties.php
     │ ├── specialties_add.php
     │ └── specialties_edit.php
+    ├── css/
+    │ └── ...
     ├── funcs/
     │ ├── booking.php 
     │ ├── diagnosis_detail.php
