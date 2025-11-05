@@ -72,6 +72,10 @@ if ($nv_Request->isset_request('save', 'post')) {
     }
 }
 
+// Nạp CSS riêng cho trang chẩn đoán
+$patient_add_css = NV_BASE_SITEURL . 'modules/' . $module_file . '/css/patient_add.css';
+$xtpl->assign('PATIENT_ADD_CSS', $patient_add_css);
+
 $xtpl->assign('ACTION', NV_BASE_ADMINURL . 'index.php?nv=' . $module_name . '&op=patient_add');
 $xtpl->assign('BACK_LINK', NV_BASE_ADMINURL . 'index.php?nv=' . $module_name . '&op=patient');
 

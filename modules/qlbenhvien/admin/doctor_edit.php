@@ -93,6 +93,10 @@ if ($submit) {
     }
 }
 
+// Nạp CSS riêng cho trang chẩn đoán
+$doctor_edit_css = NV_BASE_SITEURL . 'modules/' . $module_file . '/css/doctor_edit.css';
+$xtpl->assign('DOCTOR_EDIT_CSS', $doctor_edit_css);
+
 // 🧾 Gán dữ liệu ra form
 $xtpl->assign('ID', $id);
 $xtpl->assign('HOTEN', htmlspecialchars($doctor['hoten']));

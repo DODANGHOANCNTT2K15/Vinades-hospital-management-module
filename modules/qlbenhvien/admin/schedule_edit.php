@@ -124,6 +124,10 @@ foreach ($status_list as $key => $text) {
     $xtpl->parse('main.status_option');
 }
 
+// Nạp CSS riêng cho trang chẩn đoán
+$schedule_edit_css = NV_BASE_SITEURL . 'modules/' . $module_file . '/css/schedule_edit.css';
+$xtpl->assign('SCHEDULE_EDIT_CSS', $schedule_edit_css);
+
 // Liên kết hành động
 $xtpl->assign('ACTION_LINK', NV_BASE_ADMINURL . "index.php?nv=$module_name&op=schedule_edit&id=$id");
 $xtpl->assign('BACK_LINK', NV_BASE_ADMINURL . "index.php?nv=$module_name&op=schedule&action=detail&id=$id");

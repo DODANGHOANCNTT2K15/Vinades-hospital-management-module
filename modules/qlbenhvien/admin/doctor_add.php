@@ -80,6 +80,9 @@ foreach ($result_khoa as $k) {
     $xtpl->parse('main.chuyenkhoa_option');
 }
 
+// Nạp CSS riêng cho trang chẩn đoán
+$doctor_add_css = NV_BASE_SITEURL . 'modules/' . $module_file . '/css/doctor_add.css';
+$xtpl->assign('DOCTOR_ADD_CSS', $doctor_add_css);
 $xtpl->assign('ACTION', NV_BASE_ADMINURL . 'index.php?nv=' . $module_name . '&op=doctor_add');
 $xtpl->assign('BACK_LINK', NV_BASE_ADMINURL . 'index.php?nv=' . $module_name . '&op=doctor');
 

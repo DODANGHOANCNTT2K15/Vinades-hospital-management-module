@@ -55,6 +55,10 @@ $xtpl->assign('EMAIL', htmlspecialchars($patient['email']));
 $xtpl->assign('USERID', htmlspecialchars($patient['userid']));
 $xtpl->assign('NGAYTAO', $ngaytao_text);
 
+// Nạp CSS riêng cho trang chẩn đoán
+$patient_detail_css = NV_BASE_SITEURL . 'modules/' . $module_file . '/css/patient_detail.css';
+$xtpl->assign('PATIENT_DETAIL_CSS', $patient_detail_css);
+
 // Link về danh sách và link edit
 $xtpl->assign('BACK_LINK', NV_BASE_ADMINURL . "index.php?nv=$module_name&op=patient");
 $xtpl->assign('EDIT_LINK', NV_BASE_ADMINURL . "index.php?nv=$module_name&op=patient_edit&id=" . $id);

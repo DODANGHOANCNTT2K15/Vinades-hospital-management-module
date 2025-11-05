@@ -247,6 +247,10 @@ elseif ($action == 'confirm') {
     exit();
 }
 
+// Nạp CSS riêng cho trang chẩn đoán
+$schedule_css = NV_BASE_SITEURL . 'modules/' . $module_file . '/css/schedule.css';
+$xtpl->assign('SCHEDULE_CSS', $schedule_css);
+
 $xtpl->parse('main');
 $contents = $xtpl->text('main');
 
