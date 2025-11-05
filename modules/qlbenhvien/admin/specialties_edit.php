@@ -64,6 +64,10 @@ if ($submit) {
     }
 }
 
+// Nạp CSS riêng cho trang chẩn đoán
+$specialties_edit_css = NV_BASE_SITEURL . 'modules/' . $module_file . '/css/specialties_edit.css';
+$xtpl->assign('SPECIALTIES_EDIT_CSS', $specialties_edit_css);
+
 // 🧾 Gán dữ liệu ra form
 $xtpl->assign('ID', $id);
 $xtpl->assign('TENCHUYENKHOA', htmlspecialchars($spec['tenchuyenkhoa']));

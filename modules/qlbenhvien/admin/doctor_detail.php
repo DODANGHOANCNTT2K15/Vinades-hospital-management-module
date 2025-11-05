@@ -40,6 +40,10 @@ $xtpl = new XTemplate(
     NV_ROOTDIR . '/themes/' . $global_config['module_theme'] . '/modules/' . $module_file
 );
 
+// Nạp CSS riêng cho trang chẩn đoán
+$doctor_detail_css = NV_BASE_SITEURL . 'modules/' . $module_file . '/css/doctor_detail.css';
+$xtpl->assign('DOCTOR_DETAIL_CSS', $doctor_detail_css);
+
 // Gán dữ liệu
 $xtpl->assign('ID', $doctor['id']);
 $xtpl->assign('HOTEN', $doctor['hoten']);

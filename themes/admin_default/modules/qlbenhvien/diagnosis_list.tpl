@@ -1,56 +1,5 @@
 <!-- BEGIN: main -->
-<style>
-.page-header {
-    margin-top: 0;
-    margin-bottom: 20px;
-    width: 100%;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    flex-wrap: nowrap;
-}
-
-.page-header h2 {
-    margin: 0;
-    font-size: 20px;
-    color: #2b6cb0;
-    font-weight: 600;
-    display: flex;
-    align-items: center;
-    gap: 6px;
-}
-
-.page-header .btn-success {
-    background-color: #38a169;
-    border: none;
-    padding: 8px 14px;
-    border-radius: 6px;
-    transition: background 0.2s ease;
-}
-
-.page-header .btn-success:hover {
-    background-color: #2f855a;
-}
-
-.page-header .btn-info {
-    background-color: #3182ce;
-    border: none;
-    padding: 8px 14px;
-    border-radius: 6px;
-    color: white;
-    cursor: pointer;
-    transition: background 0.2s ease;
-}
-
-.page-header .btn-info:hover {
-    background-color: #2b6cb0;
-}
-
-.row_data:hover {
-    background-color: #4079b5ff !important;
-    color: white;
-}
-</style>
+<link rel="stylesheet" href="{DIAGNOSES_LIST_CSS}">
 
 <div class="page-header">
     <h2>Danh sách chẩn đoán</h2>

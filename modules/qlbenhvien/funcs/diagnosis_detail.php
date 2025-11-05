@@ -39,6 +39,9 @@ if ($data) {
     $xtpl->parse('main.empty');
 }
 
+// Nạp CSS riêng cho trang chẩn đoán
+$diagnosis_detail_css = NV_BASE_SITEURL . 'modules/' . $module_file . '/css/diagnosis_detail.css';
+$xtpl->assign('DIAGNOSIS_DETAIL_CSS', $diagnosis_detail_css);
 $xtpl->parse('main');
 $contents = $xtpl->text('main');
 

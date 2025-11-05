@@ -39,6 +39,10 @@ if ($nv_Request->isset_request('save', 'post')) {
     }
 }
 
+// Nạp CSS riêng cho trang chẩn đoán
+$specialties_css = NV_BASE_SITEURL . 'modules/' . $module_file . '/css/specialties_add.css';
+$xtpl->assign('SPECIALTIES_CSS', $specialties_css);
+
 $xtpl->assign('ACTION', NV_BASE_ADMINURL . 'index.php?nv=' . $module_name . '&op=specialties_add');
 $xtpl->assign('BACK_LINK', NV_BASE_ADMINURL . 'index.php?nv=' . $module_name . '&op=specialties');
 

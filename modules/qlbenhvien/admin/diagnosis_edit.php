@@ -87,6 +87,10 @@ $xtpl->assign('CHANDOAN', htmlspecialchars($row['chandoan']));
 $xtpl->assign('DONTHUOC', htmlspecialchars($row['donthuoc']));
 $xtpl->assign('NGAYTAO', !empty($row['ngaytao']) ? $row['ngaytao'] : date('Y-m-d'));
 
+// Nạp CSS riêng cho trang chẩn đoán
+$diagnoses_edit_css = NV_BASE_SITEURL . 'modules/' . $module_file . '/css/diagnosis_edit.css';
+$xtpl->assign('DIAGNOSES_EDIT_CSS', $diagnoses_edit_css);
+
 // Hiển thị thông tin lịch khám (không sửa)
 $xtpl->assign('NGAYKHAM', date('d/m/Y', strtotime($row['ngaykham'])));
 $xtpl->assign('BENHNHAN', htmlspecialchars($row['patient_name']));

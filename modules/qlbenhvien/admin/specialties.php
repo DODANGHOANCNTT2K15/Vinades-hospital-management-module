@@ -71,6 +71,9 @@ if(!empty($result)){
     $xtpl->parse('main.list.no_data');
 }
 
+// Nạp CSS riêng cho trang chẩn đoán
+$specialties_css = NV_BASE_SITEURL . 'modules/' . $module_file . '/css/specialties.css';
+$xtpl->assign('SPECIALTIES_CSS', $specialties_css);
 
 // Phân trang - nhớ giữ tham số keyword trong URL phân trang
 $base_url = NV_BASE_ADMINURL . "index.php?nv=$module_name&op=specialties";

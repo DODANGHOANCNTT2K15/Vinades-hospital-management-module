@@ -149,6 +149,10 @@ for ($h = 13; $h <= 17; $h++) {
     $xtpl->parse('main.giokham');
 }
 
+// Nạp CSS riêng cho trang chẩn đoán
+$schedule_add_css = NV_BASE_SITEURL . 'modules/' . $module_file . '/css/schedule_add.css';
+$xtpl->assign('SCHEDULE_ADD_CSS', $schedule_add_css);
+
 $xtpl->assign('ACTION', NV_BASE_ADMINURL . 'index.php?nv=' . $module_name . '&op=schedule_add');
 $xtpl->assign('BACK_LINK', NV_BASE_ADMINURL . 'index.php?nv=' . $module_name . '&op=schedule');
 

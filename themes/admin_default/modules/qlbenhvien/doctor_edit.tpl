@@ -1,29 +1,10 @@
 <!-- BEGIN: main -->
-<style>
-.form-container {
-    background: #fff;
-    padding: 25px 30px;
-    border-radius: 10px;
-    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-    max-width: 700px;
-    margin: 0 auto;
-}
-.form-group { margin-bottom: 15px; }
-label { font-weight: 600; color: #333; display: block; margin-bottom: 5px; }
-input, select, textarea {
-    width: 100%; padding: 8px; border: 1px solid #ccc;
-    border-radius: 6px; font-size: 14px;
-}
-.gender-radio { display: flex; gap: 15px; }
-.btn { padding: 8px 16px; border-radius: 6px; cursor: pointer; text-decoration: none; }
-.btn-primary { background: #2563eb; color: white; border: none; }
-.btn-secondary { background: #f3f4f6; border: 1px solid #ccc; color: #333; }
-.error-message { color: red; font-weight: 600; margin-bottom: 15px; }
-</style>
+<link rel="stylesheet" href="{DOCTOR_EDIT_CSS}">
 
 <div class="form-container">
-    <h2>Chỉnh sửa thông tin bác sĩ</h2>
-
+    
+    <h2 style="font-size:20px; color: #2b6cb0;
+    font-weight: 600;">Chỉnh sửa thông tin bác sĩ</h2>
     <!-- BEGIN: error -->
     <div class="error-message">{ERROR}</div>
     <!-- END: error -->

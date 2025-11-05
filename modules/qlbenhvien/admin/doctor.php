@@ -39,6 +39,10 @@ $xtpl = new XTemplate(
     NV_ROOTDIR . '/themes/' . $global_config['module_theme'] . '/modules/' . $module_file
 );
 
+// Nạp CSS riêng cho trang chẩn đoán
+$doctor_admin_css = NV_BASE_SITEURL . 'modules/' . $module_file . '/css/doctor_admin.css';
+$xtpl->assign('DOCTOR_ADMIN_CSS', $doctor_admin_css);
+
 $xtpl->assign('ADD_LINK', NV_BASE_ADMINURL . "index.php?nv=$module_name&op=doctor_add");
 $xtpl->assign('KEYWORD', htmlspecialchars($keyword, ENT_QUOTES)); // Gán để giữ lại giá trị search trong input
 $xtpl->assign('MODULE_NAME', $module_name);

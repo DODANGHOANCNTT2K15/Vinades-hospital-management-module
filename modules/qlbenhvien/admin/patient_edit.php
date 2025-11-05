@@ -95,6 +95,10 @@ $xtpl->assign('DIA_CHI', htmlspecialchars($patient['diachi']));
 $xtpl->assign('SDT', htmlspecialchars($patient['sdt']));
 $xtpl->assign('EMAIL', htmlspecialchars($patient['email']));
 
+// Nạp CSS riêng cho trang chẩn đoán
+$patient_edit_css = NV_BASE_SITEURL . 'modules/' . $module_file . '/css/patient_edit.css';
+$xtpl->assign('PATIENT_EDIT_CSS', $patient_edit_css);
+
 // Radio giới tính
 $xtpl->assign('GIOITINH_MALE_CHECKED', $patient['gioitinh'] === 'male' ? 'checked' : '');
 $xtpl->assign('GIOITINH_FEMALE_CHECKED', $patient['gioitinh'] === 'female' ? 'checked' : '');

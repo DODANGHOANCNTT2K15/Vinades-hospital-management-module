@@ -84,6 +84,10 @@ if (!empty($generate_page)) {
     $xtpl->parse('main.list.pagination');
 }
 
+// Nạp CSS riêng cho trang chẩn đoán
+$patient_css = NV_BASE_SITEURL . 'modules/' . $module_file . '/css/patient.css';
+$xtpl->assign('PATIENT_CSS', $patient_css);
+
 $xtpl->assign('TOTAL_INFO', "Tổng cộng $total bệnh nhân");
 
 $xtpl->parse('main.list');

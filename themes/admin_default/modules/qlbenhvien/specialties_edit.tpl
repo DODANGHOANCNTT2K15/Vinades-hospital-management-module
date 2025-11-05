@@ -1,88 +1,9 @@
 <!-- BEGIN: main -->
-<style>
-.specialies-edit-container {
-    background: #fff;
-    border-radius: 10px;
-    padding: 25px 30px;
-    max-width: 650px;
-    margin: 0 auto;
-    box-shadow: 0 2px 10px rgba(0,0,0,0.08);
-}
-.specialies-form .form-group {
-    margin-bottom: 16px;
-}
-.specialies-form label {
-    display: block;
-    font-weight: 600;
-    color: #333;
-    margin-bottom: 6px;
-}
-.specialies-form .form-control,
-.specialies-form .form-select,
-.specialies-form textarea {
-    width: 100%;
-    padding: 8px 10px;
-    border: 1px solid #d1d5db;
-    border-radius: 6px;
-    font-size: 14px;
-    transition: all 0.2s ease;
-}
-.specialies-form .form-control:focus,
-.specialies-form .form-select:focus {
-    border-color: #2b6cb0;
-    box-shadow: 0 0 0 2px rgba(43,108,176,0.2);
-    outline: none;
-}
-.specialies-form textarea {
-    resize: vertical;
-    min-height: 80px;
-}
-.form-actions {
-    display: flex;
-    justify-content: flex-end;
-    align-items: center;
-    gap: 10px;
-    margin-top: 20px;
-}
-.btn {
-    display: inline-block;
-    font-weight: 500;
-    border-radius: 6px;
-    padding: 8px 16px;
-    font-size: 14px;
-    cursor: pointer;
-    text-decoration: none;
-    transition: all 0.2s ease;
-}
-.btn-primary {
-    background-color: #2b6cb0;
-    color: #fff;
-    border: none;
-}
-.btn-primary:hover {
-    background-color: #1e4f8f;
-}
-.btn-secondary {
-    background-color: #f3f4f6;
-    color: #333;
-    border: 1px solid #ccc;
-}
-.btn-secondary:hover {
-    background-color: #e5e7eb;
-}
-.required {
-    color: red;
-    margin-left: 3px;
-}
-.error-message {
-    color: red;
-    font-weight: 600;
-    margin-bottom: 10px;
-}
-</style>
+<link rel="stylesheet" href="{SPECIALTIES_EDIT_CSS}">
 
 <div class="specialies-edit-container">
-    <h2>Chỉnh sửa chuyên khoa</h2>
+    <h2 style="font-size:20px; color: #2b6cb0;
+    font-weight: 600;">Chỉnh sửa chuyên khoa</h2>
 
     <!-- BEGIN: error -->
     <div class="error-message">{ERROR}</div>

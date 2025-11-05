@@ -81,7 +81,9 @@ foreach ($schedules as $s) {
     $xtpl->assign('SCHEDULE', $s);
     $xtpl->parse('main.schedule_option');
 }
-
+// Nạp CSS riêng cho trang chẩn đoán
+$diagnosis_css = NV_BASE_SITEURL . 'modules/' . $module_file . '/css/diagnosis.css';
+$xtpl->assign('DIAGNOSIS_CSS', $diagnosis_css);
 $xtpl->assign('ACTION', NV_BASE_ADMINURL . 'index.php?nv=' . $module_name . '&op=diagnosis');
 $xtpl->parse('main');
 $contents = $xtpl->text('main');

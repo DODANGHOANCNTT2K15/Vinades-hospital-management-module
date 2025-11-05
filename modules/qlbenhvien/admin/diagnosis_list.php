@@ -14,6 +14,10 @@ $xtpl = new XTemplate(
     NV_ROOTDIR . '/themes/' . $global_config['module_theme'] . '/modules/' . $module_file
 );
 
+// Nạp CSS riêng cho trang chẩn đoán
+$diagnoses_list_css = NV_BASE_SITEURL . 'modules/' . $module_file . '/css/diagnosis_list.css';
+$xtpl->assign('DIAGNOSES_LIST_CSS', $diagnoses_list_css);
+
 $xtpl->assign('MODULE_NAME', $module_name);
 
 // --- Pagination ---
