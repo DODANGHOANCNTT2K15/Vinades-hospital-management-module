@@ -130,3 +130,7 @@ Tuần 1 – 2: Thiết kế CSDL, tạo module cơ bản
 Tuần 3 – 4 - 5: Phát triển chức năng frontend (user), phát triển giao diện và tính năng admin. 
 
 Tuần 6: Kiểm thử, hoàn thiện và viết báo cáo
+
+## 🥰 LỜI CẢM ƠN
+
+Trong suốt quá trình thực tập và thực hiện dự án tại NukeViet, nhóm chúng em đã nhận được sự hướng dẫn, giúp đỡ và chỉ bảo tận tình từ anh Trần Thanh Tùng. Nhóm xin gửi lời cảm ơn chân thành và sâu sắc đến anh Trần Thanh Tùng, cùng toàn thể đội ngũ NukeViet đã tạo điều kiện, hỗ trợ và truyền đạt nhiều kinh nghiệm quý báu trong suốt thời gian thực tập.
